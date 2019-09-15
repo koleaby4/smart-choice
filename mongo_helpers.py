@@ -18,5 +18,9 @@ def connect_to_mongo():
 def get_rules():
     with connect_to_mongo() as connect:
         rules = connect[DATABASE_NAME][RULES_COLLECTION].find()
-        [print(rule) for rule in rules]
-        return
+        return list(rules)
+
+def insert_rule(data):
+    with connect_to_mongo() as connect:
+        rules = connect[DATABASE_NAME][RULES_COLLECTION]
+        rules.insert_one(data)

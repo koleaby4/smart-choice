@@ -4,4 +4,10 @@
 
 <h1>On rules page</h1>
 
+<ul>
+    {% for rule in rules %}
+    <li>{{rule.name}} - {{rule.date_created}}</li>
+    {% endfor %}
+</ul>
+
 {% endblock content %}
