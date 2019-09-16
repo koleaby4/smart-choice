@@ -3,24 +3,27 @@ import os
 
 DATABASE_NAME = 'smart_choice_db'
 RULES_COLLECTION = 'rules'
+COMPARISONS_COLLECTION = 'comparisons'
 
-def connect_to_mongo():
-    # MONGO_URI = os.environ.get('MONGO_URI')
-    #
+
+def get_mongo_client():
     try:
-        # print(f'connecting to: {MONGO_URI}')
-        connection = pymongo.MongoClient(os.environ.get('MONGO_CONNECTION_STRING'))
+        client = pymongo.MongoClient(
+            os.environ.get('MONGO_CONNECTION_STRING'))
         print('connected...')
-        return connection
+        return client
     except pymongo.errors.ConnectionFailure as e:
-        print(e)
+        print(f'Failed connecting to database.\n{e}')
+        raise
+
 
 def get_rules():
-    with connect_to_mongo() as connect:
-        rules = connect[DATABASE_NAME][RULES_COLLECTION].find()
+    with get_mongo_client() as client:
+        rules = client[DATABASE_NAME][RULES_COLLECTION].find()
         return list(rules)
 
+
 def insert_rule(data):
-    with connect_to_mongo() as connect:
-        rules = connect[DATABASE_NAME][RULES_COLLECTION]
+    with get_mongo_client() as client:
+        rules = client[DATABASE_NAME][RULES_COLLECTION]
         rules.insert_one(data)

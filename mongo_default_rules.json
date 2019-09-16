@@ -1,0 +1,64 @@
+[
+  {
+    "name": "car comparison (example)",
+    "date_created": "2019-01-24T22:08:12.510696",
+    "criteria": [
+      {
+        "criterion": "price",
+        "multiplier": 5,
+        "note": "lower - better"
+      },
+      {
+        "criterion": "brand",
+        "multiplier": 4,
+        "note": "stronger - better"
+      },
+      {
+        "criterion": "warranty",
+        "multiplier": 4,
+        "note": "longer - better"
+      },
+      {
+        "criterion": "resale value",
+        "multiplier": 3,
+        "note": "higher - better"
+      },
+      {
+        "criterion": "cost of service",
+        "multiplier": 2,
+        "note": "lower - better"
+      }
+    ]
+  },
+  {
+    "name": "job comparison (example)",
+    "date_created": "2019-08-01T22:08:12.510696",
+    "criteria": [
+      {
+        "criterion": "salary",
+        "multiplier": 5,
+        "note": "higher - better"
+      },
+      {
+        "criterion": "brand",
+        "multiplier": 4,
+        "note": "stronger - better"
+      },
+      {
+        "criterion": "modern tech stack",
+        "multiplier": 4,
+        "note": "newer - better"
+      },
+      {
+        "criterion": "pension contributions",
+        "multiplier": 3,
+        "note": "higher - better"
+      },
+      {
+        "criterion": "annual leave",
+        "multiplier": 2,
+        "note": "longer - better"
+      }
+    ]
+  }
+]
