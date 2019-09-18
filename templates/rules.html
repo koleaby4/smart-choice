@@ -4,9 +4,15 @@
 
 <h1>On rules page</h1>
 
+<button id="createRuleButton" type="button" class="btn btn-primary">Create</button>
+
+<script type="text/javascript">
+    document.getElementById("createRuleButton").onclick = () => location.href = '{{url_for("create_rule")}}';
+</script>
+
 <ul>
     {% for rule in rules %}
-    <li>{{rule.name}} - {{rule.date_created}}</li>
+    <li>{{rule.rule_name}} - {{rule.date_created}}</li>
     {% endfor %}
 </ul>
 
