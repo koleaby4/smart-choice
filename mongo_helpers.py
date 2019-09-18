@@ -16,14 +16,16 @@ def get_mongo_client():
         print(f'Failed connecting to database.\n{e}')
         raise
 
+def get_mongo_db_handler():
+    with get_mongo_client() as db_client:
+        return db_client[DATABASE_NAME]
 
 def get_rules():
-    with get_mongo_client() as client:
-        rules = client[DATABASE_NAME][RULES_COLLECTION].find()
-        return list(rules)
-
+    db = get_mongo_db_handler()
+    rules = db[RULES_COLLECTION].find()
+    return list(rules)
 
 def insert_rule(data):
-    with get_mongo_client() as client:
-        rules = client[DATABASE_NAME][RULES_COLLECTION]
-        rules.insert_one(data)
+    db = get_mongo_db_handler()
+    rules = db[RULES_COLLECTION]
+    rules.insert_one(data)

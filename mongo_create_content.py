@@ -3,7 +3,7 @@ import mongo_helpers
 import json
 
 
-def connect_to_database(db_name):
+def create_or_connect_to_database(db_name):
     mongo_client = mongo_helpers.get_mongo_client()
     message = f'database "{db_name}" already exists. OK.' if db_name in mongo_client.list_database_names(
     ) else f'creating database: {db_name}'
@@ -32,7 +32,7 @@ def create_default_rules(db, file_path, collection_name):
 
 if __name__ == '__main__':
 
-    db = connect_to_database(mongo_helpers.DATABASE_NAME)
+    db = create_or_connect_to_database(mongo_helpers.DATABASE_NAME)
 
     create_collections(
         db, [mongo_helpers.RULES_COLLECTION, mongo_helpers.COMPARISONS_COLLECTION])
