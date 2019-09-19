@@ -1,5 +1,6 @@
 import pymongo
 import os
+from bson.objectid import ObjectId
 
 DATABASE_NAME = 'smart_choice_db'
 RULES_COLLECTION = 'rules'
@@ -16,16 +17,32 @@ def get_mongo_client():
         print(f'Failed connecting to database.\n{e}')
         raise
 
-def get_mongo_db_handler():
+
+def mongo_db_handler():
     with get_mongo_client() as db_client:
         return db_client[DATABASE_NAME]
 
+
 def get_rules():
-    db = get_mongo_db_handler()
-    rules = db[RULES_COLLECTION].find()
-    return list(rules)
+    return list(rules_collection_handler().find())
+
+
+def mongo_collection_handler(collection_name):
+    return mongo_db_handler()[collection_name]
+
+
+def rules_collection_handler():
+    return mongo_collection_handler(RULES_COLLECTION)
+
 
 def insert_rule(data):
-    db = get_mongo_db_handler()
-    rules = db[RULES_COLLECTION]
-    rules.insert_one(data)
+    return rules_collection_handler().insert_one(data)
+
+
+def delete_rule(id):
+    outcome = rules_collection_handler().delete_one({'_id': ObjectId(id)})
+    if outcome.deleted_count:
+        return {'status': 200, "message": f'rule with id {id} was deleted'}
+    else:
+        raise pymongo.errors.OperationFailure(
+            f'failed deleting rule with id {id}. Server response: {outcome}')

@@ -34,11 +34,6 @@ def get_rule_payload(payload):
         elif key.startswith('note'):
             notes.append(value)
 
-    # ToDo: remove once done
-    print(criteria)
-    print(multipliers)
-    print(notes)
-
     criteria_entries = []
 
     for i in range(len(criteria)):
@@ -57,14 +52,16 @@ def get_rule_payload(payload):
 @app.route('/rules/create', methods=['GET', 'POST'])
 def create_rule():
     if request.method == 'POST':
-        # ToDo: remove
-        print(json.dumps(request.form))
         data = get_rule_payload(request.form.to_dict().copy())
-        print(json.dumps(data))
         mongo_helpers.insert_rule(data)
         return redirect(url_for('rules'))
     else:
         return render_template('create_rule.html')
+
+
+@app.route('/rules/delete/<string:rule_id>', methods=['DELETE'])
+def delete_rule(rule_id):
+    return mongo_helpers.delete_rule(rule_id)
 
 
 if __name__ == "__main__":
