@@ -11,7 +11,8 @@
 
     <div class="rule" id="{{rule._id}}">
         <li>{{rule.rule_name}} - {{rule.date_created}}</li>
-        <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
+        <!-- <input type="button" class="ibtnEdit btn btn-md btn-danger" value="Edit" onclick="openRuleDetails(this)"> -->
+        <input type="button" class="delete-rule-button btn btn-md btn-danger" onclick="deleteRule(this)" value="Delete">
     </div>
 
     {% endfor %}
@@ -20,7 +21,7 @@
 <script type="text/javascript">
     document.getElementById("createRuleButton").onclick = () => location.href = '{{url_for("create_rule")}}';
 
-    function deleteData(rule_id) {
+    function deleteRuleFromDatabase(rule_id) {
         console.log(`trying to delete ${rule_id}`)
         let outcome
 
@@ -31,14 +32,14 @@
             .then(outcome => console.log(outcome))
     }
 
-    $('input[class~=ibtnDel]').click(function (event) {
-        const parent_div = $(this).closest("div")[0]
-        // console.log(parent.id);
-        // console.log($(this).parent())
-        // const rule_id = $(this).parent().id
-        deleteData(parent_div.id)
-        parent_div.remove()
-    });
+    function deleteRule(event) {
+        {
+            const parent_div = event.closest("div")
+            console.log('deleting closest...')
+            deleteRuleFromDatabase(parent_div.id)
+            parent_div.remove()
+        }
+    }
 
 </script>
 
