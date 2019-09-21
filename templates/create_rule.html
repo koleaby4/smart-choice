@@ -4,6 +4,37 @@
 
 <h1>On create rule page</h1>
 
+<script>
+    let counter = 0
+    function deleteRow(target) {
+        $(target).closest("tr").remove();
+    }
+
+    function insertRow() {
+        // ToDo: consider refactoring using JS createElement and appendChild
+        let newRow = document.createElement("tr");
+        let cols = `<td><input type="text" class="form-control" required name="name${counter}"/></td>`;
+        counter += 1
+        cols += `
+                <td>
+                    <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
+                        <option value="5" selected>5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            `;
+        cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
+
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+
+        newRow.innerHTML = cols;
+        document.querySelector('#criteria_table tbody').appendChild(newRow)
+        document.querySelector('#criteria_table tbody').lastChild.querySelector('[name*=name]').focus()
+    }
+</script>
 
 <form action="{{url_for('create_rule')}}" method="post">
     <div class="container">
@@ -22,7 +53,8 @@
             <tfoot>
                 <tr>
                     <td colspan="5" style="text-align: left;">
-                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
+                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
+                            onclick="insertRow()" />
                     </td>
                 </tr>
                 <tr>
@@ -33,60 +65,9 @@
     <button type="submit">Submit</button>
 </form>
 <script>
-    $(document).ready(function () {
-        let counter = 0;
-
-        $("#addrow").on("click", function () {
-            let newRow = $("<tr>");
-
-            let cols = `<td><input type="text" class="form-control" required name="name${counter}"/></td>`;
-
-            cols += `
-                <td>
-                    <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
-                        <option value="5" selected>5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
-                </td>
-            `;
-            cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
-
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger"  value="Delete"></td>';
-
-            newRow.append(cols);
-            $("table.criteria").append(newRow);
-            $("#criteria_table input[name*=name]").last().focus()
-            counter++;
-        });
-
-        $("#addrow").click()
-
-
-        $("table.criteria").on("click", ".ibtnDel", function (event) {
-            $(this).closest("tr").remove();
-            counter -= 1
-        });
-
-
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("addrow").click()
     });
-
-
-
-    function calculateRow(row) {
-        var price = +row.find('input[name^="price"]').val();
-
-    }
-
-    function calculateGrandTotal() {
-        var grandTotal = 0;
-        $("table.criteria").find('input[name^="price"]').each(function () {
-            grandTotal += +$(this).val();
-        });
-        $("#grandtotal").text(grandTotal.toFixed(2));
-    }
 </script>
 
 {% endblock content %}
