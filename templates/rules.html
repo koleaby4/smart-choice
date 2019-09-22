@@ -11,7 +11,7 @@
 
     <div class="rule" id="{{rule._id}}">
         <li>{{rule.rule_name}} - {{rule.date_created}}</li>
-        <!-- <input type="button" class="ibtnEdit btn btn-md btn-danger" value="Edit" onclick="openRuleDetails(this)"> -->
+        <input type="button" class="edit-rule btn btn-md btn-danger" value="Edit" onclick="openRuleDetails(this)">
         <input type="button" class="delete-rule-button btn btn-md btn-danger" onclick="deleteRule(this)" value="Delete">
     </div>
 
@@ -19,7 +19,12 @@
 </ul>
 
 <script type="text/javascript">
-    document.getElementById("createRuleButton").onclick = () => location.href = '{{url_for("create_rule")}}';
+    document.getElementById("createRuleButton").onclick = () => location.href = '{{url_for("rule_details")}}';
+
+    function openRuleDetails(event) {
+        const parent_div = event.closest("div")
+        location.href = `/rules/rule_details?_id=${parent_div.id}`
+    }
 
     function deleteRuleFromDatabase(rule_id) {
         console.log(`trying to delete ${rule_id}`)

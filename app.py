@@ -49,9 +49,9 @@ def get_rule_payload(payload):
     return data
 
 
-@app.route('/rules/create', methods=['GET'])
-def create_rule():
-    return render_template('create_rule.html')
+@app.route('/rules/rule_details', methods=['GET'])
+def rule_details():
+    return render_template('rule_details.html')
 
 
 @app.route('/rules/upsert', methods=['POST'])
