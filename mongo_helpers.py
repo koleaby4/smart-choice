@@ -39,8 +39,11 @@ def rules_collection_handler():
     return mongo_collection_handler(RULES_COLLECTION)
 
 
-def insert_rule(data):
-    return rules_collection_handler().insert_one(data)
+def upsert_rule(data):
+    filter = objectid_filter(data['_id']) if data.get(
+        '_id') else {'_id': ObjectId()}
+    print(filter)
+    return rules_collection_handler().update(filter, data, upsert=True)
 
 
 def delete_rule(id):

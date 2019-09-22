@@ -49,14 +49,16 @@ def get_rule_payload(payload):
     return data
 
 
-@app.route('/rules/create', methods=['GET', 'POST'])
+@app.route('/rules/create', methods=['GET'])
 def create_rule():
-    if request.method == 'POST':
-        data = get_rule_payload(request.form.to_dict().copy())
-        mongo_helpers.insert_rule(data)
-        return redirect(url_for('rules'))
-    else:
-        return render_template('create_rule.html')
+    return render_template('create_rule.html')
+
+
+@app.route('/rules/upsert', methods=['POST'])
+def upsert_rule():
+    data = get_rule_payload(request.form.to_dict().copy())
+    mongo_helpers.upsert_rule(data)
+    return redirect(url_for('rules'))
 
 
 @app.route('/rules/delete/<string:rule_id>', methods=['DELETE'])
