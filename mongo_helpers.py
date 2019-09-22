@@ -27,6 +27,10 @@ def get_rules():
     return list(rules_collection_handler().find())
 
 
+def get_rule(id):
+    return rules_collection_handler().find_one(objectid_filter(id))
+
+
 def mongo_collection_handler(collection_name):
     return mongo_db_handler()[collection_name]
 
@@ -40,9 +44,13 @@ def insert_rule(data):
 
 
 def delete_rule(id):
-    outcome = rules_collection_handler().delete_one({'_id': ObjectId(id)})
+    outcome = rules_collection_handler().delete_one(objectid_filter(id))
     if outcome.deleted_count:
         return {'status': 200, "message": f'rule with id {id} was deleted'}
     else:
         raise pymongo.errors.OperationFailure(
             f'failed deleting rule with id {id}. Server response: {outcome}')
+
+
+def objectid_filter(id):
+    return {'_id': ObjectId(id)}
