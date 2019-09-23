@@ -1,7 +1,7 @@
 [
   {
     "rule_name": "car comparison (example)",
-    "date_created": "2019-01-24T22:08:12.510696",
+    "timestamp": "2019-01-24T22:08:12.510696",
     "criteria": [
       {
         "criterion": "price",
@@ -32,7 +32,7 @@
   },
   {
     "rule_name": "job comparison (example)",
-    "date_created": "2019-08-01T22:08:12.510696",
+    "timestamp": "2019-08-01T22:08:12.510696",
     "criteria": [
       {
         "criterion": "salary",

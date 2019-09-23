@@ -18,9 +18,10 @@ def rules():
 
 
 def get_rule_payload(payload):
-    data = {'date_created': str(datetime.datetime.now())}
+    data = {'timestamp': str(datetime.datetime.now())}
     data['rule_name'] = payload['rule_name']
-
+    if payload['rule_id']:
+        data['_id'] = mongo_helpers.ObjectId(payload['rule_id'])
     criteria = []
     multipliers = []
     notes = []
@@ -51,7 +52,9 @@ def get_rule_payload(payload):
 
 @app.route('/rules/rule_details', methods=['GET'])
 def rule_details():
-    return render_template('rule_details.html')
+    rule_id = request.args.get('_id', None)
+    rule = mongo_helpers.get_rule(rule_id) if rule_id else None
+    return render_template('rule_details.html', rule=rule)
 
 
 @app.route('/rules/upsert', methods=['POST'])

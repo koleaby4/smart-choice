@@ -42,7 +42,6 @@ def rules_collection_handler():
 def upsert_rule(data):
     filter = objectid_filter(data['_id']) if data.get(
         '_id') else {'_id': ObjectId()}
-    print(filter)
     return rules_collection_handler().update(filter, data, upsert=True)
 
 

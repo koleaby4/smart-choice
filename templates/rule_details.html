@@ -38,7 +38,10 @@
 
 <form action="{{url_for('upsert_rule')}}" method="post">
     <div class="container">
-        <input type="text" name="rule_name" class="form-control" placeholder="rule name" required />
+        <!-- hidden field for storing rule_ids when modifying rules-->
+        <input id="rule_id" name="rule_id" type="hidden" value="">
+        <input type="text" name="rule_name" id="rule_name" class="form-control" placeholder="rule name"
+            required />
 
         <table id="criteria_table" class="table criteria">
             <thead>
@@ -63,11 +66,28 @@
         </table>
     </div>
     <button type="submit">Submit</button>
+
+    {% if rule %}
+    <!-- modifying existing rule -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector('#rule_name').value = '{{ rule.rule_name }}';
+            document.querySelector('#rule_id').value = '{{ rule._id }}';
+        });
+    </script>
+    {% else %}
+    <!-- creating new rule -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("addrow").click();
+            // no rule_id when creating new rule
+            var elem = document.querySelector('#rule_id');
+            elem.parentNode.removeChild(elem);
+        });
+    </script>
+
+    {% endif %}
+
 </form>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("addrow").click()
-    });
-</script>
 
 {% endblock content %}

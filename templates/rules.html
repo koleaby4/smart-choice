@@ -10,9 +10,11 @@
     {% for rule in rules %}
 
     <div class="rule" id="{{rule._id}}">
-        <li>{{rule.rule_name}} - {{rule.date_created}}</li>
-        <input type="button" class="edit-rule btn btn-md btn-danger" value="Edit" onclick="openRuleDetails(this)">
-        <input type="button" class="delete-rule-button btn btn-md btn-danger" onclick="deleteRule(this)" value="Delete">
+        <li>{{rule.rule_name}} - {{rule.timestamp}}</li>
+        <input type="button" class="edit-rule btn btn-md btn-danger" value="Edit"
+            onclick="openRuleDetails(this)">
+        <input type="button" class="delete-rule-button btn btn-md btn-danger" onclick="deleteRule(this)"
+            value="Delete">
     </div>
 
     {% endfor %}
