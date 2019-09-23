@@ -10,6 +10,21 @@
         $(target).closest("tr").remove();
     }
 
+    function loadCriteria(criteria) {
+        criteria.forEach(criteria => {
+            document.getElementById("addrow").click();
+
+            let nameInputs = document.querySelectorAll('input[name*=name]')
+            nameInputs[nameInputs.length - 1].value = criteria.criterion;
+
+            let weightSelects = document.querySelectorAll('select[name*=multiplier]')
+            weightSelects[weightSelects.length - 1].value = criteria.multiplier;
+
+            let noteInputs = document.querySelectorAll('input[name*=note]')
+            noteInputs[noteInputs.length - 1].value = criteria.note;
+        })
+    }
+
     function insertRow() {
         // ToDo: consider refactoring using JS createElement and appendChild
         let newRow = document.createElement("tr");
@@ -73,6 +88,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('#rule_name').value = '{{ rule.rule_name }}';
             document.querySelector('#rule_id').value = '{{ rule._id }}';
+            loadCriteria({{ rule.criteria | tojson }});
         });
     </script>
     {% else %}
