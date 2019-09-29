@@ -22,44 +22,88 @@
             <option value="{{rule._id}}">{{rule.rule_name}}</option>
             {% endfor %}
         </select>
-        <!--
-        <table id="criteria_table" class="table criteria">
-            <thead>
-                <tr>
-                    <td>Criterion</td>
-                    <td>Multiplier</td>
-                    <td>Note</td>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5" style="text-align: left;">
-                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
-                            onclick="insertRow()" />
-                    </td>
-                </tr>
-                <tr>
-                </tr>
-            </tfoot>
-        </table> -->
+        <div class="comparison-container">
+            <table id="comparison-table" class="table" style="border: 1px solid black;">
+                <thead>
+                    <tr class="comparison-header-row">
+                        <th>Options to compare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">
+                            <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
+                                onclick="insertRow()" />
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <button type="submit">Submit</button>
     <script>
+
+        function getRuleById(rule_id) {
+            const selectedRule = {{ rules | tojson
+        }}.find((rule) => rule._id.includes(rule_id))
+        return selectedRule
+
+        }
+
+        function getSelectedRule() {
+            let dropDown = document.querySelector('[name=rules]');
+            let rule_id = dropDown.rule_id;
+            return getRuleById(rule_id);
+        }
+
         function populateComparisonTable(selectedOption) {
             const selectedRuleId = selectedOption.value
 
-            let table = document.createElement("table");
-            table.setAttribute("id", "comparison-table");
+            selectedOption.setAttribute('rule_id', selectedRuleId)
+            const selectedRule = getRuleById(selectedRuleId)
 
-            const thead = table.createTHead()
-            const headerRow = thead.insertRow(0)
+            const headerRow = document.querySelector('.comparison-header-row')
 
-            const selectedRule = {{ rules | tojson
-        }}.find((rule) => rule._id.includes(selectedRuleId))
-        console.log(selectedRule)
+            for (let i = 1; i <= selectedRule.criteria.length; i++) {
+                let col = headerRow.insertCell(i);
+                let ruleDetails = selectedRule.criteria[i - 1]
+                let multiplier = ruleDetails.multiplier
+                col.setAttribute('multiplier', multiplier);
+                col.innerText = `${ruleDetails.criterion}\n(x${multiplier})`;
+
+                console.log(col.innerText);
+            }
         }
+
+        let counter = 0;
+        function insertRow() {
+            let newRow = document.createElement("tr");
+            let cols = `<td><input type="text" class="form-control" required name="name${counter}"/></td>`;
+            counter += 1
+            cols += `
+                <td>
+                    <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
+                        <option value="5" selected>5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            `;
+            cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
+
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+
+            newRow.innerHTML = cols;
+            document.querySelector('#comparison-table tbody').appendChild(newRow)
+            document.querySelector('#comparison-table tbody').lastChild.querySelector('[name*=name]').focus()
+        }
+
     </script>
 </form>
 
