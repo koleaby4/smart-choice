@@ -49,7 +49,9 @@ def get_rule_payload(payload):
     data['criteria'] = criteria_entries
     return data
 
-
+# ToDo:
+# merge rule_details, upsert_rule and delete_rule
+# into one end point with different methods
 @app.route('/rules/rule_details', methods=['GET'])
 def rule_details():
     rule_id = request.args.get('_id', None)
@@ -64,10 +66,18 @@ def upsert_rule():
     return redirect(url_for('rules'))
 
 
+# ToDo: move inside
 @app.route('/rules/delete/<string:rule_id>', methods=['DELETE'])
 def delete_rule(rule_id):
     return mongo_helpers.delete_rule(rule_id)
 
+
+@app.route('/comparisons')
+def comparisons():
+    rules = mongo_helpers.get_rules()
+    for rule in rules:
+        rule["_id"] = str(rule["_id"])
+    return render_template('comparisons.html', rules=rules)
 
 if __name__ == "__main__":
     host = os.environ.get('IP', '0.0.0.0')

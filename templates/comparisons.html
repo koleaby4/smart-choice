@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>On comparison page</h1>
+<form action="{{url_for('upsert_rule')}}" method="post">
+    <div class="container">
+        <!-- hidden field for storing comparison_ids when modifying comparisons-->
+        <input id="comparison_id" name="comparison_id" type="hidden" value="">
+        <input type="text" name="comparison_name" id="comparison_name" class="form-control"
+            placeholder="comparison name" required />
+
+        <ul>
+            {% for rule in rules %}
+            <li>{{rule}}</li>
+            {% endfor %}
+        </ul>
+
+        <select name="rules" class="custom-select" class="form-control col-sm-4"
+            onchange="populateComparisonTable(this)">
+            {% for rule in rules %}
+            <option value="{{rule._id}}">{{rule.rule_name}}</option>
+            {% endfor %}
+        </select>
+        <!--
+        <table id="criteria_table" class="table criteria">
+            <thead>
+                <tr>
+                    <td>Criterion</td>
+                    <td>Multiplier</td>
+                    <td>Note</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: left;">
+                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
+                            onclick="insertRow()" />
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </tfoot>
+        </table> -->
+    </div>
+    <button type="submit">Submit</button>
+    <script>
+        function populateComparisonTable(selectedOption) {
+            const selectedRuleId = selectedOption.value
+
+            let table = document.createElement("table");
+            table.setAttribute("id", "comparison-table");
+
+            const thead = table.createTHead()
+            const headerRow = thead.insertRow(0)
+
+            const selectedRule = {{ rules | tojson
+        }}.find((rule) => rule._id.includes(selectedRuleId))
+        console.log(selectedRule)
+        }
+    </script>
+</form>
+
+{% endblock %}
