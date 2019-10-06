@@ -13,3 +13,16 @@ set PORT=5000
 set MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>
 
 python app.py
+
+# Install dependencies
+
+Prerequisites:
+Make sure `npm` ins installed (see [these steps](https://www.npmjs.com/get-npm) for details).
+
+Open terminal window and execute `npm`.
+
+# Execute cypress tests
+
+1. open terminal window
+2. `cd` into project folder
+3. execute `npm run cypress:open`
