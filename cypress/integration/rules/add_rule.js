@@ -1,25 +1,30 @@
 /// <reference types="Cypress" />
 
+import { clickStartCtaButton } from "../landing";
+import {
+  clickCreateRuleButton,
+  enterRuleName,
+  enterCriterionName,
+  submitRule,
+  enterNote
+} from "../../helpers/create_rule";
+
 describe("Users can create a new rule", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
   it("with single criterion", () => {
-    cy.get("#start-cta-button").click();
-    cy.get("#createRuleButton").click();
+    clickStartCtaButton();
+    clickCreateRuleButton();
 
     const tail = Date.now();
-    cy.get("#rule_name").type(`Test-rule ${tail}`);
-    cy.get("[name^=name]")
-      .last()
-      .type(`Criterion ${tail}`);
 
-    cy.get("[name^=note]")
-      .last()
-      .type(`Note ${tail}`);
+    enterRuleName(`Test-rule ${tail}`);
+    enterCriterionName(`Criterion ${tail}`);
+    enterNote(`Note ${tail}`);
 
-    cy.get("[data-test=submit-button]").click();
+    submitRule();
 
     cy.get(".rule li")
       .contains(tail)
