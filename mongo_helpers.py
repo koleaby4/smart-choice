@@ -24,7 +24,7 @@ def mongo_db_handler():
 
 
 def get_rules():
-    return list(rules_collection_handler().find())
+    return list(rules_collection_handler().find().sort("timestamp", -1))
 
 
 def get_rule(id):
