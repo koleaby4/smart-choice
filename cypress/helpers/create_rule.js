@@ -1,5 +1,7 @@
 export const clickCreateRuleButton = () => cy.get("#createRuleButton").click();
 
+export const clickAddRowButton = () => cy.get("#addrow").click();
+
 export const enterRuleName = name => cy.get("#rule_name").type(name);
 
 export const enterCriterionName = name =>
