@@ -8,7 +8,7 @@ import {
   submitRule,
   enterNote,
   clickAddRowButton,
-  deleteRule
+  deleteRules
 } from "../../helpers/create_rule";
 
 describe("Users can create rules", () => {
@@ -18,9 +18,9 @@ describe("Users can create rules", () => {
 
   const testRulePrefix = 'Test-rule';
 
-  after(() => {
-    cy.get('li').contains(testRulePrefix).each(() => deleteRule(testRulePrefix))
-  })
+  after(() =>
+    deleteRules(testRulePrefix)
+  )
 
 
   it("with single criterion and delete it", () => {
@@ -43,7 +43,7 @@ describe("Users can create rules", () => {
       .first()
       .should("contain", ruleName);
 
-    deleteRule(ruleName)
+    deleteRules(ruleName)
   });
 
   it("with multiple criteria", () => {

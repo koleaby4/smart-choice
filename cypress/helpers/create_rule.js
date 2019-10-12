@@ -1,3 +1,4 @@
+
 export const clickCreateRuleButton = () => cy.get("#createRuleButton").click();
 
 export const clickAddRowButton = () => cy.get("#addrow").click();
@@ -18,7 +19,11 @@ export const enterNote = note =>
 
 export const submitRule = () => cy.get("[data-test=submit-button]").click();
 
-export const deleteRule = ruleName =>
-  cy.contains(ruleName).first().parent().find('[class~=delete-rule-button]').click()
-    .then(deletedRule => cy.wrap(deletedRule).should('not.exist'))
+export const deleteRules = ruleNameToDelete =>
+  cy.get('li').each(rule => cy.wrap(rule).invoke('text')
+    .then(ruleName => {
+      if (ruleName.includes(ruleNameToDelete)) {
+        cy.contains(ruleName).parent().find('[class~=delete-rule-button]').click()
+      }
+    }))
 
