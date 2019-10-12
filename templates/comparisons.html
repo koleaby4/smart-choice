@@ -56,7 +56,7 @@
 
         function getSelectedRule() {
             let dropDown = document.querySelector('[name=rules]');
-            let rule_id = dropDown.rule_id;
+            let rule_id = dropDown.getAttribute('rule_id');
             return getRuleById(rule_id);
         }
 
@@ -82,26 +82,33 @@
         let counter = 0;
         function insertRow() {
             let newRow = document.createElement("tr");
-            let cols = `<td><input type="text" class="form-control" required name="name${counter}"/></td>`;
-            counter += 1
-            cols += `
+            const selectedRule = getSelectedRule();
+            const criteria = selectedRule.criteria;
+
+            let cols = `<td><input type="text" class="form-control" required name="option${counter}"/></td>`;
+
+            for (let i = 0; i < criteria.length; i++) {
+                cols += `
                 <td>
-                    <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
+                    <select name="${criteria[i]['criterion']}" class="custom-select" class="form-control col-sm-4">
                         <option value="5" selected>5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
                         <option value="2">2</option>
                         <option value="1">1</option>
                     </select>
+                    <span name='multiplied'></span>
                 </td>
             `;
-            cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
 
+            }
             cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+            cols += '<td><span class="total">Placeholder</span></td>';
 
             newRow.innerHTML = cols;
             document.querySelector('#comparison-table tbody').appendChild(newRow)
-            document.querySelector('#comparison-table tbody').lastChild.querySelector('[name*=name]').focus()
+            document.querySelector('#comparison-table tbody').lastChild.querySelector('[name*=option]').focus()
+            counter += 1
         }
 
     </script>
