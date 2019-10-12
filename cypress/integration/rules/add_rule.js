@@ -7,21 +7,31 @@ import {
   enterCriterionName,
   submitRule,
   enterNote,
-  clickAddRowButton
+  clickAddRowButton,
+  deleteRule
 } from "../../helpers/create_rule";
 
-describe("Users can create a new rule", () => {
+describe("Users can create rules", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
-  it("with single criterion", () => {
+  const testRulePrefix = 'Test-rule';
+
+  after(() => {
+    cy.get('li').contains(testRulePrefix).each(() => deleteRule(testRulePrefix))
+  })
+
+
+  it("with single criterion and delete it", () => {
     clickStartCtaButton();
     clickCreateRuleButton();
 
     const tail = Date.now();
 
-    enterRuleName(`Test-rule ${tail}`);
+    const ruleName = `${testRulePrefix} ${tail}`
+
+    enterRuleName(ruleName);
     enterCriterionName(`Criterion ${tail}`);
     enterNote(`Note ${tail}`);
 
@@ -31,7 +41,9 @@ describe("Users can create a new rule", () => {
 
     cy.get(".rule li")
       .first()
-      .should("contain", tail);
+      .should("contain", ruleName);
+
+    deleteRule(ruleName)
   });
 
   it("with multiple criteria", () => {
@@ -40,13 +52,12 @@ describe("Users can create a new rule", () => {
 
     const tail = Date.now();
 
-    enterRuleName(`Rule 1 ${tail}`);
+    enterRuleName(`${testRulePrefix} 1 ${tail}`);
     enterCriterionName(`Criterion 1 ${tail}`);
     enterNote(`Note 1 ${tail}`);
 
     clickAddRowButton();
 
-    enterRuleName(`Rule 2 ${tail}`);
     enterCriterionName(`Criterion 2 ${tail}`);
     enterNote(`Note 2 ${tail}`);
 

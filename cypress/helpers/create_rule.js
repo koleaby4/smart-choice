@@ -17,3 +17,8 @@ export const enterNote = note =>
     .type(note);
 
 export const submitRule = () => cy.get("[data-test=submit-button]").click();
+
+export const deleteRule = ruleName =>
+  cy.contains(ruleName).first().parent().find('[class~=delete-rule-button]').click()
+    .then(deletedRule => cy.wrap(deletedRule).should('not.exist'))
+
