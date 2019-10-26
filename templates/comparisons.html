@@ -17,7 +17,7 @@
         </ul>
 
         <select name="rules" class="custom-select" class="form-control col-sm-4"
-            onchange="populateComparisonTable(this)">
+            onchange="populateComparisonTable(this)" data-test="rules-list">
             {% for rule in rules %}
             <option value="{{rule._id}}">{{rule.rule_name}}</option>
             {% endfor %}
@@ -90,7 +90,7 @@
             for (let i = 0; i < criteria.length; i++) {
                 cols += `
                 <td>
-                    <select name="${criteria[i]['criterion']}" class="custom-select" class="form-control col-sm-4">
+                    <select name="${criteria[i]['criterion']}" class="form-control col-sm-4 custom-select">
                         <option value="5" selected>5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>

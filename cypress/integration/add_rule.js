@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { clickStartCtaButton } from "../landing";
+import { clickStartCtaButton } from "../helpers/landing";
 import {
   clickCreateRuleButton,
   enterRuleName,
@@ -9,7 +9,9 @@ import {
   enterNote,
   clickAddRowButton,
   deleteRules
-} from "../../helpers/create_rule";
+} from "../helpers/rule_details";
+import { clickComparison, clickRules } from "../helpers/nav";
+import { selectRule } from "../helpers/comparison";
 
 describe("Users can create rules", () => {
   beforeEach(() => {
@@ -19,7 +21,9 @@ describe("Users can create rules", () => {
   const testRulePrefix = 'Test-rule';
 
   after(() =>
-    deleteRules(testRulePrefix)
+    clickRules().then(() =>
+      deleteRules(testRulePrefix)
+    )
   )
 
 
@@ -37,13 +41,13 @@ describe("Users can create rules", () => {
 
     submitRule();
 
-    cy.location("pathname").should("eq", "/rules");
-
     cy.get(".rule li")
       .first()
       .should("contain", ruleName);
 
     deleteRules(ruleName)
+
+    cy.contains(ruleName).should('not.exist')
   });
 
   it("with multiple criteria", () => {
@@ -63,10 +67,9 @@ describe("Users can create rules", () => {
 
     submitRule();
 
-    cy.location("pathname").should("eq", "/rules");
-
     cy.get(".rule li")
       .first()
       .should("contain", tail);
   });
 });
+

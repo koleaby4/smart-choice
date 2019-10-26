@@ -17,7 +17,8 @@ export const enterNote = note =>
     .last()
     .type(note);
 
-export const submitRule = () => cy.get("[data-test=submit-button]").click();
+export const submitRule = () => cy.get("[data-test=submit-button]").click()
+  .then(() => cy.location("pathname").should("eq", "/rules"))
 
 export const deleteRules = ruleNameToDelete =>
   cy.get('li').each(rule => cy.wrap(rule).invoke('text')
