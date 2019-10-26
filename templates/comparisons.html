@@ -63,16 +63,19 @@
             deleteRowsFromComparisonTable()
 
             const headerRow = document.querySelector('.comparison-header-row')
-
-            for (let i = 1; i <= selectedRule.criteria.length; i++) {
+            const criteriaCount = selectedRule.criteria.length
+            for (let i = 1; i <= criteriaCount; i++) {
                 let col = headerRow.insertCell(i);
                 let ruleDetails = selectedRule.criteria[i - 1]
                 let multiplier = ruleDetails.multiplier
                 col.setAttribute('multiplier', multiplier);
                 col.innerText = `${ruleDetails.criterion}\n(x${multiplier})`;
-
-                console.log(col.innerText);
             }
+
+            let col = headerRow.insertCell(selectedRule.criteria.length + 1);
+            col.innerText = 'Total';
+
+            document.querySelector('#addrow').click();
         }
 
         function deleteRowsFromComparisonTable() {
@@ -91,19 +94,20 @@
                 cols += `
                 <td>
                     <select name="${criteria[i]}['criterion']" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
-                        <option value="5" selected>5</option>
+                        <option value="0" selected disabled>?</option>
+                        <option value="5">5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
                         <option value="2">2</option>
                         <option value="1">1</option>
                     </select>
-                    <span name="weighted_score"></span>
+                    <span name="weighted_score">0</span>
                 </td>
             `;
 
             }
+            cols += '<td><span name="total">0</span></td>';
             cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
-            cols += '<td><span class="total">Placeholder</span></td>';
 
             newRow.innerHTML = cols;
             document.querySelector('#comparison-table tbody').appendChild(newRow)
@@ -113,10 +117,22 @@
 
 
         function calculateScore(target) {
-            const currentCell = target.closest('td')
-            const score = parseInt(target.value);
-            const weight = parseInt(target.closest('table').querySelectorAll('thead td')[currentCell.cellIndex].getAttribute('multiplier'));
-            target.nextElementSibling.innerText = score * weight;
+            applyWeightedToCell(target.closest('td'))
+            applyRowTotal(target.closest('tr'))
+        }
+
+        function applyWeightedToCell(cell) {
+            const score = parseInt(cell.querySelector('select').value);
+            const weight = parseInt(cell.closest('table').querySelectorAll('thead td')[cell.cellIndex].getAttribute('multiplier'));
+            cell.querySelector('[name=weighted_score]').innerText = score * weight;
+
+        }
+
+        function applyRowTotal(row) {
+            const weightedScores = [...row.querySelectorAll('[name=weighted_score]')].map(weightedScoreContainer => parseInt(weightedScoreContainer.innerText));
+            const total = weightedScores.reduce((a, b) => a + b);
+            row.querySelector('[name=total]').innerHTML = total
+
         }
 
         function deleteRow(target) {
