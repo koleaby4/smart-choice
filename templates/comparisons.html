@@ -10,14 +10,8 @@
         <input type="text" name="comparison_name" id="comparison_name" class="form-control"
             placeholder="comparison name" required />
 
-        <ul>
-            {% for rule in rules %}
-            <li>{{rule}}</li>
-            {% endfor %}
-        </ul>
-
-        <select name="rules" class="custom-select" class="form-control col-sm-4"
-            onchange="populateComparisonTable(this)" data-test="rules-list">
+        <select name="rules" class="form-control col-sm-4" onchange="populateComparisonTable(this)"
+            data-test="rules-list">
             {% for rule in rules %}
             <option value="{{rule._id}}">{{rule.rule_name}}</option>
             {% endfor %}
@@ -66,6 +60,8 @@
             selectedOption.setAttribute('rule_id', selectedRuleId)
             const selectedRule = getRuleById(selectedRuleId)
 
+            deleteRowsFromComparisonTable()
+
             const headerRow = document.querySelector('.comparison-header-row')
 
             for (let i = 1; i <= selectedRule.criteria.length; i++) {
@@ -77,6 +73,10 @@
 
                 console.log(col.innerText);
             }
+        }
+
+        function deleteRowsFromComparisonTable() {
+            document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
         }
 
         let counter = 0;
