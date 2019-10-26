@@ -10,8 +10,8 @@
         <input type="text" name="comparison_name" id="comparison_name" class="form-control"
             placeholder="comparison name" required />
 
-        <select name="rules" class="form-control col-sm-4" onchange="populateComparisonTable(this)"
-            data-test="rules-list">
+        <select name="rules" class="custom-select" class="form-control col-sm-4"
+            onchange="populateComparisonTable(this)" data-test="rules-list">
             {% for rule in rules %}
             <option value="{{rule._id}}">{{rule.rule_name}}</option>
             {% endfor %}
@@ -20,7 +20,7 @@
             <table id="comparison-table" class="table" style="border: 1px solid black;">
                 <thead>
                     <tr class="comparison-header-row">
-                        <th>Options to compare</th>
+                        <td>Options to compare</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,14 +90,14 @@
             for (let i = 0; i < criteria.length; i++) {
                 cols += `
                 <td>
-                    <select name="${criteria[i]['criterion']}" class="form-control col-sm-4 custom-select">
+                    <select name="${criteria[i]}['criterion']" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
                         <option value="5" selected>5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
                         <option value="2">2</option>
                         <option value="1">1</option>
                     </select>
-                    <span name='multiplied'></span>
+                    <span name="weighted_score"></span>
                 </td>
             `;
 
@@ -111,6 +111,17 @@
             counter += 1
         }
 
+
+        function calculateScore(target) {
+            const currentCell = target.closest('td')
+            const score = parseInt(target.value);
+            const weight = parseInt(target.closest('table').querySelectorAll('thead td')[currentCell.cellIndex].getAttribute('multiplier'));
+            target.nextElementSibling.innerText = score * weight;
+        }
+
+        function deleteRow(target) {
+            target.closest('tr').remove()
+        }
     </script>
 </form>
 
