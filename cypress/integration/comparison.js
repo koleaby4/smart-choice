@@ -8,17 +8,17 @@ import {
   submitRule,
   enterNote,
   clickAddRowButton,
-  deleteRules
+  enterMultiplier
 } from "../helpers/rule_details";
 import { clickComparison, clickRules } from "../helpers/nav";
-import { selectRule } from "../helpers/comparison";
+import { selectRule, enterOptionName, enterComparisonName, selectScores, assertWeightedScore, clickAddRow, assertTotal } from "../helpers/comparison";
 
 describe("Users can create comparison", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
-  const testRulePrefix = 'Test-rule';
+  const testRulePrefix = '[Test-rule]';
 
   // after(() =>
   //   clickRules().then(() =>
@@ -32,19 +32,39 @@ describe("Users can create comparison", () => {
     clickCreateRuleButton();
 
     const ruleName = `${testRulePrefix} 3 ${Date.now()}`
+
     enterRuleName(ruleName);
     enterCriterionName(`Criterion A`);
-    enterNote(`Note A`);
+    enterMultiplier("5")
 
     clickAddRowButton();
-
     enterCriterionName(`Criterion B`);
-    enterNote(`Note B`);
+    enterMultiplier("4")
 
     submitRule();
 
     clickComparison()
+
+    enterComparisonName('[Test] Car Comparison')
     selectRule(ruleName)
+
+    enterOptionName('Mercedes')
+    selectScores(["5", "3"])
+
+    assertWeightedScore(0, '25')
+    assertWeightedScore(1, '12')
+
+    assertTotal('37')
+
+    clickAddRow()
+
+    enterOptionName('BMW')
+    selectScores(["4", "2"])
+
+    assertWeightedScore(0, '20')
+    assertWeightedScore(1, '8')
+
+    assertTotal('28')
   });
 });
 

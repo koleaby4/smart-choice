@@ -8,7 +8,8 @@ import {
   submitRule,
   enterNote,
   clickAddRowButton,
-  deleteRules
+  deleteRules,
+  deleteLastCriterion
 } from "../helpers/rule_details";
 import { clickComparison, clickRules } from "../helpers/nav";
 import { selectRule } from "../helpers/comparison";
@@ -18,7 +19,7 @@ describe("Users can create rules", () => {
     cy.visit("/");
   });
 
-  const testRulePrefix = 'Test-rule';
+  const testRulePrefix = '[Test-rule]';
 
   after(() =>
     clickRules().then(() =>
@@ -70,6 +71,25 @@ describe("Users can create rules", () => {
     cy.get(".rule li")
       .first()
       .should("contain", tail);
+  });
+
+  it.only("and delete criterion", () => {
+    clickStartCtaButton();
+    clickCreateRuleButton();
+
+    const tail = Date.now();
+
+    enterRuleName(`${testRulePrefix} delete criterion ${tail}`);
+    enterCriterionName(`Criterion 1 ${tail}`);
+
+    clickAddRowButton();
+
+    const crterionToDelete = 'criterion to delete'
+    enterCriterionName(crterionToDelete);
+
+    deleteLastCriterion()
+
+    cy.contains(crterionToDelete).should('not.exist')
   });
 });
 

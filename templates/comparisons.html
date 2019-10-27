@@ -93,7 +93,7 @@
             for (let i = 0; i < criteria.length; i++) {
                 cols += `
                 <td>
-                    <select name="${criteria[i]}['criterion']" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
+                    <select name="${criteria[i]['criterion']}" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
                         <option value="0" selected disabled>?</option>
                         <option value="5">5</option>
                         <option value="4">4</option>

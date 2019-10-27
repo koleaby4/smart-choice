@@ -11,6 +11,12 @@ export const enterCriterionName = name =>
     .last()
     .type(name);
 
+export const enterMultiplier = value =>
+  cy
+    .get("[name^=multiplier]")
+    .last()
+    .select(value);
+
 export const enterNote = note =>
   cy
     .get("[name^=note]")
@@ -28,3 +34,9 @@ export const deleteRules = ruleNameToDelete =>
       }
     }))
 
+
+
+export const deleteLastCriterion = () =>
+  cy
+    .get("[value=Delete]")
+    .last().click();
