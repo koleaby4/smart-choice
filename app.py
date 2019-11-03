@@ -3,6 +3,7 @@ from flask import Flask, request, url_for, redirect, render_template
 import mongo_helpers
 import datetime
 import json
+import pdb
 
 app = Flask(__name__)
 
@@ -78,6 +79,13 @@ def comparisons():
     for rule in rules:
         rule["_id"] = str(rule["_id"])
     return render_template('comparisons.html', rules=rules)
+
+
+@app.route('/comparisons/<int:comparison_id>', methods=['POST'])
+def save_comparison(comparison_id):
+    pdb.set_trace()
+    return comparisons()
+
 
 if __name__ == "__main__":
     host = os.environ.get('IP', '0.0.0.0')

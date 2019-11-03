@@ -46,7 +46,7 @@
     }}.find((rule) => rule._id.includes(rule_id))
     return selectedRule
 
-        }
+    }
 
     function getSelectedRule() {
         let dropDown = document.querySelector('[name=rules]');
@@ -115,11 +115,10 @@
         counter += 1
     }
 
-    function saveComparison() {
-        alert('Inside comparison')
+    async function saveComparison() {
         const id = Date.now();
         const rule = getSelectedRule();
-        const name = document.querySelector('#comparison_name').innerText;
+        const name = document.querySelector('#comparison_name').value;
         const rows = document.querySelectorAll('#comparison-table tbody tr')
 
         const options = []
@@ -127,8 +126,7 @@
         rows.forEach(row => {
             const option = {}
             option['option_name'] = row.querySelector('[name*="option"]').value
-            option['criteria'] = []
-            const results = []
+            option['scores'] = []
 
             for (let i = 0; i < rule.criteria.length; i++) {
                 const result = {}
@@ -138,7 +136,7 @@
                 result['multiplier'] = criterion.multiplier
                 result['score'] = parseInt(row.querySelectorAll('select')[i].value)
                 result['weighted_score'] = parseInt(row.querySelectorAll('[name=weighted_score]')[i].innerText)
-                results.push(result)
+                option['scores'].push(result)
             }
 
             option['total'] = row.querySelector('[name=total]').innerText
@@ -146,8 +144,16 @@
 
         })
 
-        const form = { id, rule, name, options }
-        console.log(form)
+        const data = { id, rule, name, options }
+        const response = await fetch(`/comparisons/${id}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+        )
     }
 
     function calculateScore(target) {
