@@ -3,95 +3,95 @@
 {% block content %}
 
 <h1>On comparison page</h1>
-<form action="{{url_for('upsert_rule')}}" method="post">
-    <div class="container">
-        <!-- hidden field for storing comparison_ids when modifying comparisons-->
-        <input id="comparison_id" name="comparison_id" type="hidden" value="">
-        <input type="text" name="comparison_name" id="comparison_name" class="form-control"
-            placeholder="comparison name" required />
+<!-- <form action="{{url_for('upsert_rule')}}" method="post"> -->
+<div class="container">
+    <!-- hidden field for storing comparison_ids when modifying comparisons-->
+    <input id="comparison_id" name="comparison_id" type="hidden" value="">
+    <input type="text" name="comparison_name" id="comparison_name" class="form-control" placeholder="comparison name"
+        required />
 
-        <select name="rules" class="custom-select" class="form-control col-sm-4"
-            onchange="populateComparisonTable(this)" data-test="rules-list">
-            {% for rule in rules %}
-            <option value="{{rule._id}}">{{rule.rule_name}}</option>
-            {% endfor %}
-        </select>
-        <div class="comparison-container">
-            <table id="comparison-table" class="table" style="border: 1px solid black;">
-                <thead>
-                    <tr class="comparison-header-row">
-                        <td>Options to compare</td>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5" style="text-align: left;">
-                            <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
-                                onclick="insertRow()" />
-                        </td>
-                    </tr>
-                    <tr>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+    <select name="rules" class="custom-select" class="form-control col-sm-4" onchange="populateComparisonTable(this)"
+        data-test="rules-list">
+        {% for rule in rules %}
+        <option value="{{rule._id}}">{{rule.rule_name}}</option>
+        {% endfor %}
+    </select>
+    <div class="comparison-container">
+        <table id="comparison-table" class="table" style="border: 1px solid black;">
+            <thead>
+                <tr class="comparison-header-row">
+                    <td>Options to compare</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: left;">
+                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
+                            onclick="insertRow()" />
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-    <button type="submit">Submit</button>
-    <script>
+</div>
+<button onclick="saveComparison()">Submit</button>
+<script>
 
-        function getRuleById(rule_id) {
-            const selectedRule = {{ rules | tojson
-        }}.find((rule) => rule._id.includes(rule_id))
-        return selectedRule
+    function getRuleById(rule_id) {
+        const selectedRule = {{ rules | tojson
+    }}.find((rule) => rule._id.includes(rule_id))
+    return selectedRule
 
         }
 
-        function getSelectedRule() {
-            let dropDown = document.querySelector('[name=rules]');
-            let rule_id = dropDown.getAttribute('rule_id');
-            return getRuleById(rule_id);
+    function getSelectedRule() {
+        let dropDown = document.querySelector('[name=rules]');
+        let rule_id = dropDown.getAttribute('rule_id');
+        return getRuleById(rule_id);
+    }
+
+    function populateComparisonTable(selectedOption) {
+        const selectedRuleId = selectedOption.value
+
+        selectedOption.setAttribute('rule_id', selectedRuleId)
+        const selectedRule = getRuleById(selectedRuleId)
+
+        deleteRowsFromComparisonTable()
+
+        const headerRow = document.querySelector('.comparison-header-row')
+        const criteriaCount = selectedRule.criteria.length
+        for (let i = 1; i <= criteriaCount; i++) {
+            let col = headerRow.insertCell(i);
+            let ruleDetails = selectedRule.criteria[i - 1]
+            let multiplier = ruleDetails.multiplier
+            col.setAttribute('multiplier', multiplier);
+            col.innerText = `${ruleDetails.criterion}\n(x${multiplier})`;
         }
 
-        function populateComparisonTable(selectedOption) {
-            const selectedRuleId = selectedOption.value
+        let col = headerRow.insertCell(selectedRule.criteria.length + 1);
+        col.innerText = 'Total';
 
-            selectedOption.setAttribute('rule_id', selectedRuleId)
-            const selectedRule = getRuleById(selectedRuleId)
+        document.querySelector('#addrow').click();
+    }
 
-            deleteRowsFromComparisonTable()
+    function deleteRowsFromComparisonTable() {
+        document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
+    }
 
-            const headerRow = document.querySelector('.comparison-header-row')
-            const criteriaCount = selectedRule.criteria.length
-            for (let i = 1; i <= criteriaCount; i++) {
-                let col = headerRow.insertCell(i);
-                let ruleDetails = selectedRule.criteria[i - 1]
-                let multiplier = ruleDetails.multiplier
-                col.setAttribute('multiplier', multiplier);
-                col.innerText = `${ruleDetails.criterion}\n(x${multiplier})`;
-            }
+    let counter = 0;
+    function insertRow() {
+        let newRow = document.createElement("tr");
+        const selectedRule = getSelectedRule();
+        const criteria = selectedRule.criteria;
 
-            let col = headerRow.insertCell(selectedRule.criteria.length + 1);
-            col.innerText = 'Total';
+        let cols = `<td><input type="text" class="form-control" required name="option${counter}"/></td>`;
 
-            document.querySelector('#addrow').click();
-        }
-
-        function deleteRowsFromComparisonTable() {
-            document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
-        }
-
-        let counter = 0;
-        function insertRow() {
-            let newRow = document.createElement("tr");
-            const selectedRule = getSelectedRule();
-            const criteria = selectedRule.criteria;
-
-            let cols = `<td><input type="text" class="form-control" required name="option${counter}"/></td>`;
-
-            for (let i = 0; i < criteria.length; i++) {
-                cols += `
+        for (let i = 0; i < criteria.length; i++) {
+            cols += `
                 <td>
                     <select name="${criteria[i]['criterion']}" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
                         <option value="0" selected disabled>?</option>
@@ -105,40 +105,74 @@
                 </td>
             `;
 
+        }
+        cols += '<td><span name="total">0</span></td>';
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+
+        newRow.innerHTML = cols;
+        document.querySelector('#comparison-table tbody').appendChild(newRow)
+        document.querySelector('#comparison-table tbody').lastChild.querySelector('[name*=option]').focus()
+        counter += 1
+    }
+
+    function saveComparison() {
+        alert('Inside comparison')
+        const id = Date.now();
+        const rule = getSelectedRule();
+        const name = document.querySelector('#comparison_name').innerText;
+        const rows = document.querySelectorAll('#comparison-table tbody tr')
+
+        const options = []
+
+        rows.forEach(row => {
+            const option = {}
+            option['option_name'] = row.querySelector('[name*="option"]').value
+            option['criteria'] = []
+            const results = []
+
+            for (let i = 0; i < rule.criteria.length; i++) {
+                const result = {}
+                const criterion = rule.criteria[i]
+
+                result['criterion'] = criterion.criterion
+                result['multiplier'] = criterion.multiplier
+                result['score'] = parseInt(row.querySelectorAll('select')[i].value)
+                result['weighted_score'] = parseInt(row.querySelectorAll('[name=weighted_score]')[i].innerText)
+                results.push(result)
             }
-            cols += '<td><span name="total">0</span></td>';
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
 
-            newRow.innerHTML = cols;
-            document.querySelector('#comparison-table tbody').appendChild(newRow)
-            document.querySelector('#comparison-table tbody').lastChild.querySelector('[name*=option]').focus()
-            counter += 1
-        }
+            option['total'] = row.querySelector('[name=total]').innerText
+            options.push(option)
 
+        })
 
-        function calculateScore(target) {
-            applyWeightedToCell(target.closest('td'))
-            applyRowTotal(target.closest('tr'))
-        }
+        const form = { id, rule, name, options }
+        console.log(form)
+    }
 
-        function applyWeightedToCell(cell) {
-            const score = parseInt(cell.querySelector('select').value);
-            const weight = parseInt(cell.closest('table').querySelectorAll('thead td')[cell.cellIndex].getAttribute('multiplier'));
-            cell.querySelector('[name=weighted_score]').innerText = score * weight;
+    function calculateScore(target) {
+        applyWeightedToCell(target.closest('td'))
+        applyRowTotal(target.closest('tr'))
+    }
 
-        }
+    function applyWeightedToCell(cell) {
+        const score = parseInt(cell.querySelector('select').value);
+        const weight = parseInt(cell.closest('table').querySelectorAll('thead td')[cell.cellIndex].getAttribute('multiplier'));
+        cell.querySelector('[name=weighted_score]').innerText = score * weight;
 
-        function applyRowTotal(row) {
-            const weightedScores = [...row.querySelectorAll('[name=weighted_score]')].map(weightedScoreContainer => parseInt(weightedScoreContainer.innerText));
-            const total = weightedScores.reduce((a, b) => a + b);
-            row.querySelector('[name=total]').innerHTML = total
+    }
 
-        }
+    function applyRowTotal(row) {
+        const weightedScores = [...row.querySelectorAll('[name=weighted_score]')].map(weightedScoreContainer => parseInt(weightedScoreContainer.innerText));
+        const total = weightedScores.reduce((a, b) => a + b);
+        row.querySelector('[name=total]').innerHTML = total
 
-        function deleteRow(target) {
-            target.closest('tr').remove()
-        }
-    </script>
-</form>
+    }
+
+    function deleteRow(target) {
+        target.closest('tr').remove()
+    }
+</script>
+<!-- </form> -->
 
 {% endblock %}
