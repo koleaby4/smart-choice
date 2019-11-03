@@ -3,7 +3,7 @@ from flask import Flask, request, url_for, redirect, render_template
 import mongo_helpers
 import datetime
 import json
-import pdb
+# import pdb
 
 app = Flask(__name__)
 
@@ -73,18 +73,19 @@ def delete_rule(rule_id):
     return mongo_helpers.delete_rule(rule_id)
 
 
-@app.route('/comparisons')
-def comparisons():
+@app.route('/comparison')
+def new_comparison():
     rules = mongo_helpers.get_rules()
     for rule in rules:
         rule["_id"] = str(rule["_id"])
-    return render_template('comparisons.html', rules=rules)
+    return render_template('comparison.html', rules=rules)
 
 
-@app.route('/comparisons/<int:comparison_id>', methods=['POST'])
-def save_comparison(comparison_id):
-    pdb.set_trace()
-    return comparisons()
+@app.route('/comparisons', methods=['POST'])
+def save_comparison():
+    # pdb.set_trace()
+    mongo_helpers.save_comparison(request.json)
+    return new_comparison()
 
 
 if __name__ == "__main__":

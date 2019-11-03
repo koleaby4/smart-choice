@@ -116,12 +116,10 @@
     }
 
     async function saveComparison() {
-        const id = Date.now();
         const rule = getSelectedRule();
-        const name = document.querySelector('#comparison_name').value;
-        const rows = document.querySelectorAll('#comparison-table tbody tr')
 
         const options = []
+        const rows = document.querySelectorAll('#comparison-table tbody tr')
 
         rows.forEach(row => {
             const option = {}
@@ -144,8 +142,10 @@
 
         })
 
-        const data = { id, rule, name, options }
-        const response = await fetch(`/comparisons/${id}`,
+        const name = document.querySelector('#comparison_name').value;
+
+        const data = { rule, name, options }
+        const response = await fetch(`/comparisons`,
             {
                 method: 'POST',
                 headers: {

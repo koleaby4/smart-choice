@@ -39,10 +39,18 @@ def rules_collection_handler():
     return mongo_collection_handler(RULES_COLLECTION)
 
 
+def comparisons_collection_handler():
+    return mongo_collection_handler(COMPARISONS_COLLECTION)
+
+
 def upsert_rule(data):
     filter = objectid_filter(data['_id']) if data.get(
         '_id') else {'_id': ObjectId()}
     return rules_collection_handler().update(filter, data, upsert=True)
+
+
+def save_comparison(data):
+    return comparisons_collection_handler().insert_one(data)
 
 
 def delete_rule(id):

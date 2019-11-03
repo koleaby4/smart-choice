@@ -11,8 +11,7 @@ import {
   deleteRules,
   deleteLastCriterion
 } from "../helpers/rule_details";
-import { clickComparison, clickRules } from "../helpers/nav";
-import { selectRule } from "../helpers/comparison";
+import { clickRules } from "../helpers/nav";
 
 describe("Users can create rules", () => {
   beforeEach(() => {
