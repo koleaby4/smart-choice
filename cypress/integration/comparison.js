@@ -31,14 +31,14 @@ describe("Users can create comparison", () => {
     clickStartCtaButton();
     clickCreateRuleButton();
 
-    const ruleName = `${testRulePrefix} 3 ${Date.now()}`
+    const ruleName = `${testRulePrefix} Cars ${Date.now()}`
 
     enterRuleName(ruleName);
-    enterCriterionName(`Criterion A`);
+    enterCriterionName(`Brand recognition`);
     enterMultiplier("5")
 
     clickAddRowButton();
-    enterCriterionName(`Criterion B`);
+    enterCriterionName(`Reliability`);
     enterMultiplier("4")
 
     submitRule();

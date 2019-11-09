@@ -21,8 +21,13 @@ describe("Users can create rules", () => {
   const testRulePrefix = '[Test-rule]';
 
   after(() =>
-    clickRules().then(() =>
-      deleteRules(testRulePrefix)
+    clickRules().then(() => {
+      cy.contains(testRulePrefix).its('length').then(entriesCount => {
+        if (entriesCount > 0) {
+          deleteRules(testRulePrefix)
+        }
+      })
+    }
     )
   )
 
@@ -33,11 +38,11 @@ describe("Users can create rules", () => {
 
     const tail = Date.now();
 
-    const ruleName = `${testRulePrefix} ${tail}`
+    const ruleName = `${testRulePrefix} Grocery shop ${tail}`
 
     enterRuleName(ruleName);
-    enterCriterionName(`Criterion ${tail}`);
-    enterNote(`Note ${tail}`);
+    enterCriterionName(`Proximity`);
+    enterNote(`Closer -> better`);
 
     submitRule();
 
@@ -56,14 +61,14 @@ describe("Users can create rules", () => {
 
     const tail = Date.now();
 
-    enterRuleName(`${testRulePrefix} 1 ${tail}`);
-    enterCriterionName(`Criterion 1 ${tail}`);
-    enterNote(`Note 1 ${tail}`);
+    enterRuleName(`${testRulePrefix} Schools ${tail}`);
+    enterCriterionName(`GCSE scores`);
+    enterNote(`Higher - better`);
 
     clickAddRowButton();
 
-    enterCriterionName(`Criterion 2 ${tail}`);
-    enterNote(`Note 2 ${tail}`);
+    enterCriterionName(`Proximity`);
+    enterNote(`Closer - better`);
 
     submitRule();
 
@@ -72,7 +77,7 @@ describe("Users can create rules", () => {
       .should("contain", tail);
   });
 
-  it.only("and delete criterion", () => {
+  it("and delete criterion", () => {
     clickStartCtaButton();
     clickCreateRuleButton();
 
