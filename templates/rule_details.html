@@ -51,12 +51,11 @@
     }
 </script>
 
-<form action="{{url_for('upsert_rule')}}" method="post">
+<form action="{{url_for('rules')}}/0" method="post">
     <div class="container">
         <!-- hidden field for storing rule_ids when modifying rules-->
         <input id="rule_id" name="rule_id" type="hidden" value="">
-        <input type="text" name="rule_name" id="rule_name" class="form-control" placeholder="rule name"
-            required />
+        <input type="text" name="rule_name" id="rule_name" class="form-control" placeholder="rule name" required />
 
         <table id="criteria_table" class="table criteria">
             <thead>
@@ -90,6 +89,7 @@
             document.querySelector('#rule_id').value = '{{ rule._id }}';
             loadCriteria({{ rule.criteria | tojson }});
         });
+        document.querySelector('form').setAttribute('action', `{{url_for('rules')}}/{{ rule._id }}`)
     </script>
     {% else %}
     <!-- creating new rule -->

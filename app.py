@@ -21,7 +21,7 @@ def rules():
 def get_rule_payload(payload):
     data = {'timestamp': str(datetime.datetime.now())}
     data['rule_name'] = payload['rule_name']
-    if payload['rule_id']:
+    if payload.get('rule_id'):
         data['_id'] = mongo_helpers.ObjectId(payload['rule_id'])
     criteria = []
     multipliers = []
@@ -51,17 +51,14 @@ def get_rule_payload(payload):
     return data
 
 
-@app.route('/rules/upsert', methods=['POST'])
-def upsert_rule():
-    data = get_rule_payload(request.form.to_dict().copy())
-    mongo_helpers.upsert_rule(data)
-    return redirect(url_for('rules'))
-
-
-@app.route('/rules/<string:rule_id>', methods=['GET', 'DELETE'])
+@app.route('/rules/<string:rule_id>', methods=['GET', 'POST', 'DELETE'])
 def rule(rule_id):
     if request.method == 'DELETE':
         return mongo_helpers.delete_rule(rule_id)
+    elif request.method == 'POST':
+        data = get_rule_payload(request.form.to_dict().copy())
+        mongo_helpers.upsert_rule(data, rule_id if rule_id != '0' else None)
+        return redirect(url_for('rules'))
     elif request.method == 'GET':
         rule = mongo_helpers.get_rule(rule_id) if rule_id != '0' else None
         return render_template('rule_details.html', rule=rule)
