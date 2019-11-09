@@ -68,7 +68,7 @@ def upsert_rule():
 
 
 # ToDo: move inside
-@app.route('/rules/delete/<string:rule_id>', methods=['DELETE'])
+@app.route('/rules/<string:rule_id>', methods=['DELETE'])
 def delete_rule(rule_id):
     return mongo_helpers.delete_rule(rule_id)
 
