@@ -12,27 +12,25 @@
     <div class="rule" id="{{rule._id}}">
         <li>{{rule.rule_name}} - {{rule.timestamp}}</li>
         <input type="button" class="edit-rule btn btn-md btn-light" value="Edit"
-            onclick="openRuleDetails(this)">
-        <input type="button" class="delete-rule-button btn btn-md btn-light" onclick="deleteRule(this)"
-            value="Delete">
+            onclick="openRuleDetails(this.closest('div').id)">
+        <input type="button" class="delete-rule-button btn btn-md btn-light" onclick="deleteRule(this)" value="Delete">
     </div>
 
     {% endfor %}
 </ul>
 
 <script type="text/javascript">
-    document.getElementById("createRuleButton").onclick = () => location.href = '{{url_for("rule_details")}}';
+    document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
 
-    function openRuleDetails(event) {
-        const parent_div = event.closest("div")
-        location.href = `/rules/rule_details?_id=${parent_div.id}`
+    function openRuleDetails(rule_id) {
+        location.href = `/rules/${rule_id}`
     }
 
     function deleteRuleFromDatabase(rule_id) {
         console.log(`trying to delete ${rule_id}`)
         let outcome
 
-        let url = `/rules/delete/${rule_id}`
+        let url = `/rules/${rule_id}`
         console.log(url)
         fetch(url, { method: 'delete' })
             .then(response => response.json())

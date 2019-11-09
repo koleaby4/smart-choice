@@ -3,7 +3,7 @@ from flask import Flask, request, url_for, redirect, render_template
 import mongo_helpers
 import datetime
 import json
-# import pdb
+import pdb
 
 app = Flask(__name__)
 
@@ -50,15 +50,6 @@ def get_rule_payload(payload):
     data['criteria'] = criteria_entries
     return data
 
-# ToDo:
-# merge rule_details, upsert_rule and delete_rule
-# into one end point with different methods
-@app.route('/rules/rule_details', methods=['GET'])
-def rule_details():
-    rule_id = request.args.get('_id', None)
-    rule = mongo_helpers.get_rule(rule_id) if rule_id else None
-    return render_template('rule_details.html', rule=rule)
-
 
 @app.route('/rules/upsert', methods=['POST'])
 def upsert_rule():
@@ -67,10 +58,13 @@ def upsert_rule():
     return redirect(url_for('rules'))
 
 
-# ToDo: move inside
-@app.route('/rules/<string:rule_id>', methods=['DELETE'])
-def delete_rule(rule_id):
-    return mongo_helpers.delete_rule(rule_id)
+@app.route('/rules/<string:rule_id>', methods=['GET', 'DELETE'])
+def rule(rule_id):
+    if request.method == 'DELETE':
+        return mongo_helpers.delete_rule(rule_id)
+    elif request.method == 'GET':
+        rule = mongo_helpers.get_rule(rule_id) if rule_id != '0' else None
+        return render_template('rule_details.html', rule=rule)
 
 
 @app.route('/comparison')
@@ -83,7 +77,6 @@ def new_comparison():
 
 @app.route('/comparisons', methods=['POST'])
 def save_comparison():
-    # pdb.set_trace()
     mongo_helpers.save_comparison(request.json)
     return new_comparison()
 
