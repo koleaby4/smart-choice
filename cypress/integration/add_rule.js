@@ -8,7 +8,7 @@ import {
   submitRule,
   enterNote,
   clickAddRowButton,
-  deleteRules,
+  deleteRule,
   deleteLastCriterion
 } from "../helpers/rule_details";
 import { clickRules } from "../helpers/nav";
@@ -24,7 +24,7 @@ describe("Users can create rules", () => {
     clickRules().then(() => {
       cy.contains(testRulePrefix).its('length').then(entriesCount => {
         if (entriesCount > 0) {
-          deleteRules(testRulePrefix)
+          deleteRule(testRulePrefix)
         }
       })
     }
@@ -50,7 +50,7 @@ describe("Users can create rules", () => {
       .first()
       .should("contain", ruleName);
 
-    deleteRules(ruleName)
+    deleteRule(ruleName)
 
     cy.contains(ruleName).should('not.exist')
   });

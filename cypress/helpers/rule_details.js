@@ -26,7 +26,7 @@ export const enterNote = note =>
 export const submitRule = () => cy.get("[data-test=submit-button]").click()
   .then(() => cy.location("pathname").should("eq", "/rules"))
 
-export const deleteRules = ruleNameToDelete =>
+export const deleteRule = ruleNameToDelete =>
   cy.get('li').each(rule => cy.wrap(rule).invoke('text')
     .then(ruleName => {
       if (ruleName.includes(ruleNameToDelete)) {
