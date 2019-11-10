@@ -13,11 +13,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/rules')
-def rules():
-    return render_template('rules.html', rules=mongo_helpers.get_rules())
-
-
 def get_rule_payload(payload):
     data = {'timestamp': str(datetime.datetime.now())}
     data['rule_name'] = payload['rule_name']
@@ -51,13 +46,23 @@ def get_rule_payload(payload):
     return data
 
 
+@app.route('/rules', methods=['GET', 'POST'])
+def rules():
+    if request.method == 'POST':
+        data = get_rule_payload(request.form.to_dict().copy())
+        mongo_helpers.upsert_rule(data, None)
+        return redirect(url_for('rules'))
+    elif request.method == 'GET':
+        return render_template('rules.html', rules=mongo_helpers.get_rules())
+
+
 @app.route('/rules/<string:rule_id>', methods=['GET', 'POST', 'DELETE'])
 def rule(rule_id):
     if request.method == 'DELETE':
         return mongo_helpers.delete_rule(rule_id)
     elif request.method == 'POST':
         data = get_rule_payload(request.form.to_dict().copy())
-        mongo_helpers.upsert_rule(data, rule_id if rule_id != '0' else None)
+        mongo_helpers.upsert_rule(data, rule_id)
         return redirect(url_for('rules'))
     elif request.method == 'GET':
         rule = mongo_helpers.get_rule(rule_id) if rule_id != '0' else None
