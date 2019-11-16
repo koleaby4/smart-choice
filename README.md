@@ -7,10 +7,16 @@ More info about decision-making matrix can be in [weighted decision matrix prior
 
 ```pip install -r requirements.txt```
 
-python -m flask run -p 5000
-set IP=0.0.0.0
-set PORT=5000
-set MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>
+Windows:
+    set "IP=0.0.0.0"
+    set "PORT=5000"
+    set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"
+
+Mac:
+    export "IP=0.0.0.0"
+    export "PORT=5000"
+    export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"
+
 
 python app.py
 
