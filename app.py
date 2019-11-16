@@ -69,7 +69,6 @@ def rule(rule_id):
         return render_template('rule_details.html', rule=rule)
 
 
-@app.route('/comparison')
 def new_comparison():
     rules = mongo_helpers.get_rules()
     for rule in rules:
@@ -77,9 +76,11 @@ def new_comparison():
     return render_template('comparison.html', rules=rules)
 
 
-@app.route('/comparisons', methods=['POST'])
-def save_comparison():
-    mongo_helpers.save_comparison(request.json)
+@app.route('/comparisons', methods=['GET', 'POST'])
+def comparisons():
+    if request.method == 'POST':
+        mongo_helpers.save_comparison(request.json)
+
     return new_comparison()
 
 
