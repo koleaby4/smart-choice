@@ -77,6 +77,12 @@ def new_comparison():
     return render_template('comparison.html', rules=rules)
 
 
+@app.route('/comparisons/<string:comparison_id>', methods=['DELETE'])
+def comparison(comparison_id):
+    if request.method == 'DELETE':
+        return mongo_helpers.delete_comparison(comparison_id)
+
+
 @app.route('/comparisons', methods=['GET', 'POST'])
 def comparisons():
     if request.method == 'POST':

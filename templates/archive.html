@@ -11,7 +11,7 @@
         <li>{{comparison.name}} - {{comparison.timestamp}}</li>
         <input type="button" class="edit-comparison btn btn-md btn-light" value="Edit"
             onclick="openRuleDetails(this.closest('div').id)">
-        <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteRule(this)"
+        <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteComparison(this)"
             value="Delete">
     </div>
 
@@ -19,28 +19,26 @@
 </ul>
 
 <script type="text/javascript">
-    document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
+    // document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
 
     function openRuleDetails(rule_id) {
         location.href = `/rules/${rule_id}`
     }
 
-    function deleteRuleFromDatabase(rule_id) {
-        console.log(`trying to delete ${rule_id}`)
-        let outcome
+    function deleteComparisonFromDatabase(comparison_id) {
+        console.log(`trying to delete ${comparison_id}`)
 
-        let url = `/rules/${rule_id}`
+        let url = `/comparisons/${comparison_id}`
         console.log(url)
         fetch(url, { method: 'delete' })
             .then(response => response.json())
             .then(outcome => console.log(outcome))
     }
 
-    function deleteRule(event) {
+    function deleteComparison(event) {
         {
             const parent_div = event.closest("div")
-            console.log('deleting closest...')
-            deleteRuleFromDatabase(parent_div.id)
+            deleteComparisonFromDatabase(parent_div.id)
             parent_div.remove()
         }
     }

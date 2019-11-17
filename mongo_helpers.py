@@ -65,5 +65,14 @@ def delete_rule(id):
             f'failed deleting rule with id {id}. Server response: {outcome}')
 
 
+def delete_comparison(id):
+    outcome = comparisons_collection_handler().delete_one(objectid_filter(id))
+    if outcome.deleted_count:
+        return {'status': 200, "message": f'comparison with id {id} was deleted'}
+    else:
+        raise pymongo.errors.OperationFailure(
+            f'failed deleting comparison with id {id}. Server response: {outcome}')
+
+
 def objectid_filter(id):
     return {'_id': ObjectId(id)}
