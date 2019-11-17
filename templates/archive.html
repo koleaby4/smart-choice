@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>On Archive page</h1>
+
+<ul class="archive">
+    {% for comparison in comparisons %}
+
+    <div class="comparison" id="{{comparison._id}}">
+        <li>{{comparison.name}} - {{comparison.timestamp}}</li>
+        <input type="button" class="edit-comparison btn btn-md btn-light" value="Edit"
+            onclick="openRuleDetails(this.closest('div').id)">
+        <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteRule(this)"
+            value="Delete">
+    </div>
+
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
+
+    function openRuleDetails(rule_id) {
+        location.href = `/rules/${rule_id}`
+    }
+
+    function deleteRuleFromDatabase(rule_id) {
+        console.log(`trying to delete ${rule_id}`)
+        let outcome
+
+        let url = `/rules/${rule_id}`
+        console.log(url)
+        fetch(url, { method: 'delete' })
+            .then(response => response.json())
+            .then(outcome => console.log(outcome))
+    }
+
+    function deleteRule(event) {
+        {
+            const parent_div = event.closest("div")
+            console.log('deleting closest...')
+            deleteRuleFromDatabase(parent_div.id)
+            parent_div.remove()
+        }
+    }
+
+</script>
+
+
+{% endblock content %}
