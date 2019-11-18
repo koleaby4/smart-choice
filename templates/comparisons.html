@@ -2,9 +2,11 @@
 
 {% block content %}
 
-<h1>On Archive page</h1>
+<h1>On Comparisons page</h1>
 
-<ul class="archive">
+<button id="createComparisonButton" type="button" class="btn btn-primary">Create</button>
+
+<ul class="comparisons">
     {% for comparison in comparisons %}
 
     <div class="comparison" id="{{comparison._id}}">
@@ -19,7 +21,7 @@
 </ul>
 
 <script type="text/javascript">
-    // document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
+    document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
 
     function openRuleDetails(rule_id) {
         location.href = `/rules/${rule_id}`

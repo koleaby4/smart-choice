@@ -1,6 +1,6 @@
-export const clickComparison = () =>
-    cy.get('[data-test=nav-comparison]').click().then(() =>
-        cy.location('pathname').should('contain', '/comparison')
+export const clickComparisons = () =>
+    cy.get('[data-test=nav-comparisons]').click().then(() =>
+        cy.location('pathname').should('contain', '/comparisons')
     )
 
 export const clickRules = () =>

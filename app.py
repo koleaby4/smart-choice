@@ -89,7 +89,7 @@ def comparisons():
         payload = {**request.json, 'timestamp': str(datetime.datetime.now())}
         mongo_helpers.save_comparison(payload)
     if request.method == 'GET':
-        return render_template('archive.html', comparisons=mongo_helpers.get_comparisons())
+        return render_template('comparisons.html', comparisons=mongo_helpers.get_comparisons())
 
 
 if __name__ == "__main__":

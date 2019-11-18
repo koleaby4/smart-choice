@@ -6,16 +6,15 @@ import {
   enterRuleName,
   enterCriterionName,
   submitRule,
-  enterNote,
   clickAddRowButton,
   enterMultiplier
 } from "../helpers/rule_details";
-import { clickComparison, clickRules } from "../helpers/nav";
+import { clickComparisons } from "../helpers/nav";
 import {
   selectRule, enterOptionName,
   enterComparisonName, selectScores,
   assertWeightedScore, clickAddRow,
-  assertTotal, saveComparison
+  assertTotal, saveComparison, clickCreateComparisonButton
 } from "../helpers/comparison";
 
 describe("Users can create comparison", () => {
@@ -32,7 +31,7 @@ describe("Users can create comparison", () => {
   // )
 
 
-  it.only("based on existing rule", () => {
+  it("based on existing rule", () => {
     clickStartCtaButton();
     clickCreateRuleButton();
 
@@ -48,7 +47,8 @@ describe("Users can create comparison", () => {
 
     submitRule();
 
-    clickComparison()
+    clickComparisons()
+    clickCreateComparisonButton()
 
     let comparisonName = `[Test] Car Comparison ${Date.now()}`
     enterComparisonName(comparisonName)
