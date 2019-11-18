@@ -22,4 +22,7 @@ export const selectScores = scores => {
     }
 }
 
+export const saveComparison = () =>
+    cy.get('[data-test=save-comparison]').click()
+        .then(() => cy.location('pathname').should('eq', '/comparisons'))
 

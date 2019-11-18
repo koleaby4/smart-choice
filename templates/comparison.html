@@ -37,7 +37,7 @@
         </table>
     </div>
 </div>
-<button onclick="saveComparison()">Submit</button>
+<button onclick="saveComparison()" data-test="save-comparison">Submit</button>
 <script>
 
     function getRuleById(rule_id) {
@@ -153,6 +153,8 @@
                 body: JSON.stringify(data)
             }
         )
+
+        location.href = `{{url_for("comparisons")}}`
     }
 
     function calculateScore(target) {

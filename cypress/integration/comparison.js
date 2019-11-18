@@ -11,7 +11,12 @@ import {
   enterMultiplier
 } from "../helpers/rule_details";
 import { clickComparison, clickRules } from "../helpers/nav";
-import { selectRule, enterOptionName, enterComparisonName, selectScores, assertWeightedScore, clickAddRow, assertTotal } from "../helpers/comparison";
+import {
+  selectRule, enterOptionName,
+  enterComparisonName, selectScores,
+  assertWeightedScore, clickAddRow,
+  assertTotal, saveComparison
+} from "../helpers/comparison";
 
 describe("Users can create comparison", () => {
   beforeEach(() => {
@@ -45,7 +50,8 @@ describe("Users can create comparison", () => {
 
     clickComparison()
 
-    enterComparisonName('[Test] Car Comparison')
+    let comparisonName = `[Test] Car Comparison ${Date.now()}`
+    enterComparisonName(comparisonName)
     selectRule(ruleName)
 
     enterOptionName('Mercedes')
@@ -64,7 +70,11 @@ describe("Users can create comparison", () => {
     assertWeightedScore(0, '20')
     assertWeightedScore(1, '8')
 
-    assertTotal('28')
+    assertTotal('28');
+
+    saveComparison();
+
+    cy.contains(comparisonName).should('be.visible')
   });
 });
 
