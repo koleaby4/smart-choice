@@ -74,7 +74,7 @@ def new_comparison():
     rules = mongo_helpers.get_rules()
     for rule in rules:
         rule["_id"] = str(rule["_id"])
-    return render_template('comparison.html', rules=rules)
+    return render_template('new_comparison.html', rules=rules)
 
 
 @app.route('/comparisons/<string:comparison_id>', methods=['DELETE'])
