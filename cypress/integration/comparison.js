@@ -14,7 +14,8 @@ import {
   selectRule, enterOptionName,
   enterComparisonName, selectScores,
   assertWeightedScore, clickAddRow,
-  assertTotal, saveComparison, clickCreateComparisonButton
+  assertTotal, saveComparison,
+  clickCreateComparisonButton, deleteComparisons
 } from "../helpers/comparison";
 
 describe("Users can create comparison", () => {
@@ -23,12 +24,13 @@ describe("Users can create comparison", () => {
   });
 
   const testRulePrefix = '[Test-rule]';
+  const testComparisonPrefix = '[Test]';
 
-  // after(() =>
-  //   clickRules().then(() =>
-  //     deleteRules(testRulePrefix)
-  //   )
-  // )
+  after(() =>
+    clickComparisons().then(() =>
+      deleteComparisons(testComparisonPrefix)
+    )
+  )
 
 
   it("based on existing rule", () => {
@@ -50,7 +52,7 @@ describe("Users can create comparison", () => {
     clickComparisons()
     clickCreateComparisonButton()
 
-    let comparisonName = `[Test] Car Comparison ${Date.now()}`
+    let comparisonName = `${testComparisonPrefix} Car Comparison ${Date.now()}`
     enterComparisonName(comparisonName)
     selectRule(ruleName)
 
