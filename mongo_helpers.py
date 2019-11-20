@@ -1,6 +1,7 @@
 import pymongo
 import os
 from bson.objectid import ObjectId
+import json
 
 DATABASE_NAME = 'smart_choice_db'
 RULES_COLLECTION = 'rules'
@@ -49,11 +50,23 @@ def comparisons_collection_handler():
 
 def upsert_rule(data, rule_id):
     filter = objectid_filter(rule_id) if rule_id else {'_id': ObjectId()}
-    return rules_collection_handler().update(filter, data, upsert=True)
+    outcome = rules_collection_handler().replace_one(filter, data, upsert=True)
+
+    # ToDo: move http responses into app.py?
+    if outcome.acknowledged:
+        return {'status': 200, "message": f'rule with id {filter["_id"]} was saved'}
+    else:
+        return {'status': 500, "message": f'Failed saving rule with payload:\n{json.dumps(data, indent=4)}'}
 
 
 def save_comparison(data):
-    return comparisons_collection_handler().insert_one(data)
+    outcome = comparisons_collection_handler().insert_one(data)
+
+    # ToDo: move http responses into app.py?
+    if outcome.acknowledged:
+        return {'status': 201, "message": f'comparison with id {outcome.inserted_id} was created'}
+    else:
+        return {'status': 500, "message": f'Failed saving comparison with payload:\n{json.dumps(payload, indent=4)}'}
 
 
 def delete_rule(id):

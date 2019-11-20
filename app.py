@@ -87,12 +87,7 @@ def comparison(comparison_id):
 def comparisons():
     if request.method == 'POST':
         payload = {**request.json, 'timestamp': str(datetime.datetime.now())}
-        response = mongo_helpers.save_comparison(payload)
-        if response.acknowledged:
-            return str(response.inserted_id)
-
-        raise RuntimeError(
-            f'Failed saving comparison with payload:\n{payload}')
+        return mongo_helpers.save_comparison(payload)
     if request.method == 'GET':
         return render_template('comparisons.html', comparisons=mongo_helpers.get_comparisons())
 
