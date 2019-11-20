@@ -142,8 +142,9 @@
         })
 
         const name = document.querySelector('#comparison_name').value;
+        const highestScore = Math.max(...options.map(o => o.total))
 
-        const data = { rule, name, options }
+        const data = { rule, name, options, "highest_score" : highestScore }
         const response = await fetch(`/comparisons`,
             {
                 method: 'POST',
