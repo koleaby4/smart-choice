@@ -32,3 +32,11 @@ Open terminal window and execute `npm`.
 1. open terminal window
 2. `cd` into project folder
 3. execute `npm run cypress:open`
+
+
+# Create content
+
+Windows: `set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+
+`python mongo_create_content.py`
