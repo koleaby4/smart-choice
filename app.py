@@ -81,6 +81,8 @@ def new_comparison():
 def comparison(comparison_id):
     if request.method == 'GET':
         comparison = mongo_helpers.get_comparison(comparison_id)
+        comparison["_id"] = comparison_id
+        comparison['options'].sort(key=lambda x: x['total'], reverse=True)
         return render_template('comparison_details.html', comparison=comparison)
     if request.method == 'DELETE':
         return mongo_helpers.delete_comparison(comparison_id)
