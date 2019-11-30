@@ -11,8 +11,8 @@
 
     <div class="comparison" id="{{comparison._id}}">
         <li>{{comparison.name}} - {{comparison.timestamp}}</li>
-        <input type="button" class="edit-comparison btn btn-md btn-light" value="Edit"
-            onclick="openRuleDetails(this.closest('div').id)">
+        <input type="button" class="view-comparison btn btn-md btn-light" value="View"
+            onclick="viewComparison(this.closest('div').id)">
         <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteComparison(this)"
             value="Delete">
     </div>
@@ -23,8 +23,8 @@
 <script type="text/javascript">
     document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
 
-    function openRuleDetails(rule_id) {
-        location.href = `/rules/${rule_id}`
+    function viewComparison(comparison_id) {
+        location.href = `/comparisons/${comparison_id}`
     }
 
     function deleteComparisonFromDatabase(comparison_id) {

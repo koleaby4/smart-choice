@@ -32,6 +32,10 @@ def get_rule(id):
     return rules_collection_handler().find_one(objectid_filter(id))
 
 
+def get_comparison(id):
+    return comparisons_collection_handler().find_one(objectid_filter(id))
+
+
 def get_comparisons():
     return list(comparisons_collection_handler().find().sort("timestamp", -1))
 
