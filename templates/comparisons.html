@@ -11,7 +11,7 @@
 
     <div class="comparison" id="{{comparison._id}}">
         <li>{{comparison.name}} - {{comparison.timestamp}}</li>
-        <input type="button" class="view-comparison btn btn-md btn-light" value="View"
+        <input type="button" data-test="view-comparison-details" class="view-comparison btn btn-md btn-light" value="View"
             onclick="viewComparison(this.closest('div').id)">
         <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteComparison(this)"
             value="Delete">

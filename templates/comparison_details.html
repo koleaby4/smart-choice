@@ -18,13 +18,13 @@
     <tbody>
         {%for option in comparison.options%}
         <tr>
-            <th scope="row">{{option.option_name}}</th>
+            <th scope="row" data-test="option-name">{{option.option_name}}</th>
 
             {%for score in option.scores%}
             <td scope="col">{{score.weighted_score}}</td>
             {%endfor%}
 
-            <th scope="col">{{option.total}}</th>
+            <th scope="col" data-test="total-score">{{option.total}}</th>
         </tr>
         {%endfor%}
     </tbody>

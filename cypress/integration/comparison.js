@@ -15,7 +15,7 @@ import {
   enterComparisonName, selectScores,
   assertWeightedScore, clickAddRow,
   assertTotal, saveComparison,
-  clickCreateComparisonButton, deleteComparisons
+  clickCreateComparisonButton, deleteComparisons, viewComparison, assertOptionContains
 } from "../helpers/comparison";
 
 describe("Users can create comparison", () => {
@@ -77,6 +77,10 @@ describe("Users can create comparison", () => {
     saveComparison();
 
     cy.contains(comparisonName).should('be.visible')
+
+    viewComparison()
+    assertOptionContains(0, 'Mercedes', 37)
+    assertOptionContains(1, 'BMW', 28)
   });
 });
 
