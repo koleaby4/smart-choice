@@ -32,7 +32,7 @@ export const clickCreateComparisonButton = () =>
         .then(() => cy.location('pathname').should('eq', '/comparison'))
 
 export const deleteComparisons = comparisonNameToDelete =>
-    cy.get('li').each(comparison => cy.wrap(comparison).invoke('text')
+    cy.get('[data-test=comparison-name]').each(comparison => cy.wrap(comparison).invoke('text')
         .then(comparisonName => {
             if (comparisonName.includes(comparisonNameToDelete)) {
                 cy.contains(comparisonName).parent().find('[class~=delete-comparison-button]').click()

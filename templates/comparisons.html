@@ -6,19 +6,19 @@
 
 <button id="createComparisonButton" type="button" class="btn btn-primary">Create</button>
 
-<ul class="comparisons">
+<div class="comparisons">
     {% for comparison in comparisons %}
 
     <div class="comparison" id="{{comparison._id}}">
-        <li>{{comparison.name}} - {{comparison.timestamp}}</li>
-        <input type="button" data-test="view-comparison-details" class="view-comparison btn btn-md btn-light" value="View"
-            onclick="viewComparison(this.closest('div').id)">
+        <span data-test="comparison-name">{{comparison.name}} - {{comparison.timestamp}}</span>
+        <input type="button" data-test="view-comparison-details" class="view-comparison btn btn-md btn-light"
+            value="View" onclick="viewComparison(this.closest('div').id)">
         <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteComparison(this)"
             value="Delete">
     </div>
 
     {% endfor %}
-</ul>
+</div>
 
 <script type="text/javascript">
     document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
@@ -28,13 +28,7 @@
     }
 
     function deleteComparisonFromDatabase(comparison_id) {
-        console.log(`trying to delete ${comparison_id}`)
-
-        let url = `/comparisons/${comparison_id}`
-        console.log(url)
-        fetch(url, { method: 'delete' })
-            .then(response => response.json())
-            .then(outcome => console.log(outcome))
+        fetch(`/comparisons/${comparison_id}`, { method: 'delete' })
     }
 
     function deleteComparison(event) {
