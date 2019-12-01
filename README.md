@@ -5,20 +5,30 @@ More info about decision-making matrix can be in [weighted decision matrix prior
 
 # Run locally
 
-```pip install -r requirements.txt```
+## Activate virtual environment
 
 Windows:
-    set "IP=0.0.0.0"
-    set "PORT=5000"
-    set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"
+    `env\Scripts\activate.bat`
 
 Mac:
-    export "IP=0.0.0.0"
-    export "PORT=5000"
-    export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"
+    `TBC`
+
+`pip install -r requirements.txt`
+
+# Run Flask app
+
+Windows:
+    `set "IP=0.0.0.0"`
+    `set "PORT=5000"`
+    `set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+
+Mac:
+    `export "IP=0.0.0.0"`
+    `export "PORT=5000"`
+    `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 
 
-python app.py
+`python app.py`
 
 # Install dependencies
 
