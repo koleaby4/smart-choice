@@ -7,12 +7,10 @@ import {
   enterCriterionName,
   submitRule,
   enterNote,
-  clickAddRowButton,
   deleteRule,
-  deleteLastCriterion
 } from "../helpers/rule_details";
 import { clickRules } from "../helpers/nav";
-import { editRule } from "../helpers/rules";
+import { editRule, assertRuleName } from "../helpers/rules";
 
 describe("Users can edit rules", () => {
   const testRulePrefix = '[Test-rule]';
@@ -44,22 +42,18 @@ describe("Users can edit rules", () => {
 
     submitRule();
 
-    cy.get(".rule li")
-      .first()
-      .should("contain", oldRuleName);
+    assertRuleName(0, oldRuleName);
 
     editRule(oldRuleName)
 
     const newRuleName = `${testRulePrefix} New Rule Name ${Date.now()}`
+
     enterRuleName(newRuleName);
     enterCriterionName(`Proximity`);
     enterNote(`Closer -> better`);
 
     submitRule();
-
-    cy.get(".rule li")
-      .first()
-      .should("contain", newRuleName);
+    assertRuleName(0, newRuleName);
   });
 });
 

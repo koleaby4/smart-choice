@@ -2,22 +2,23 @@
 
 {% block content %}
 
-<h1>On rules page</h1>
+<h1>View and create rules</h1>
 
 <button id="createRuleButton" type="button" class="btn btn-primary">Create</button>
 
-<ul class="rules">
+<div class="rules">
     {% for rule in rules %}
 
     <div class="rule" id="{{rule._id}}">
-        <li>{{rule.rule_name}} - {{rule.timestamp}}</li>
+        <span data-test="rule-name">{{rule.rule_name}}</span>
+        <span data-test="rule-update-time">{{rule.timestamp}}</span>
         <input type="button" class="edit-rule btn btn-md btn-light" value="Edit"
             onclick="openRuleDetails(this.closest('div').id)">
         <input type="button" class="delete-rule-button btn btn-md btn-light" onclick="deleteRule(this)" value="Delete">
     </div>
 
     {% endfor %}
-</ul>
+</div>
 
 <script type="text/javascript">
     document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`

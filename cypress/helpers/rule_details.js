@@ -27,7 +27,7 @@ export const submitRule = () => cy.get("[data-test=submit-button]").click()
   .then(() => cy.location("pathname").should("eq", "/rules"))
 
 export const deleteRule = ruleNameToDelete =>
-  cy.get('li').each(rule => cy.wrap(rule).invoke('text')
+  cy.get('[data-test=rule-name]').each(rule => cy.wrap(rule).invoke('text')
     .then(ruleName => {
       if (ruleName.includes(ruleNameToDelete)) {
         cy.contains(ruleName).parent().find('[class~=delete-rule-button]').click()
