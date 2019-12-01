@@ -14,7 +14,7 @@ def index():
 
 
 def get_rule_payload(payload):
-    data = {'timestamp': str(datetime.datetime.now())}
+    data = {'timestamp': string_timestamp()}
     data['rule_name'] = payload['rule_name']
     if payload.get('rule_id'):
         data['_id'] = mongo_helpers.ObjectId(payload['rule_id'])
@@ -91,10 +91,15 @@ def comparison(comparison_id):
 @app.route('/comparisons', methods=['GET', 'POST'])
 def comparisons():
     if request.method == 'POST':
-        payload = {**request.json, 'timestamp': str(datetime.datetime.now())}
+        payload = {
+            **request.json, 'timestamp': string_timestamp()}
         return mongo_helpers.save_comparison(payload)
     if request.method == 'GET':
         return render_template('comparisons.html', comparisons=mongo_helpers.get_comparisons())
+
+
+def string_timestamp():
+    return str(datetime.datetime.now()).split('.')[0].replace('T', ' ')
 
 
 if __name__ == "__main__":
