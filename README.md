@@ -50,3 +50,8 @@ Windows: `set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 
 `python mongo_create_content.py`
+
+# Run application
+
+1. in command line terminal navigate to project folder
+2. execute `flask run`
