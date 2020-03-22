@@ -37,7 +37,7 @@
         </table>
     </div>
 </div>
-<button onclick="saveComparison()" data-test="save-comparison">Submit</button>
+<button onclick="saveComparison()" data-test="save-comparison">Save</button>
 <script>
 
     function getRuleById(rule_id) {
@@ -144,7 +144,7 @@
         const name = document.querySelector('#comparison_name').value;
         const highestScore = Math.max(...options.map(o => o.total))
 
-        const data = { rule, name, options, "highest_score" : highestScore }
+        const data = { rule, name, options, "highest_score": highestScore }
         const response = await fetch(`/comparisons`,
             {
                 method: 'POST',
