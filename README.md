@@ -55,3 +55,9 @@ Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 
 1. in command line terminal navigate to project folder
 2. execute `flask run`
+
+# 3rd party resources
+
+1. [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
+2. [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
+3.
