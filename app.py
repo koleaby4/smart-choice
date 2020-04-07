@@ -13,6 +13,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+
 def get_rule_payload(payload):
     data = {'timestamp': string_timestamp()}
     data['rule_name'] = payload['rule_name']
