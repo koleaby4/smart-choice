@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Index html content</h1>
 
-<div class="card bg-light mb-3" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-        <h5 class="card-title">Choose Smart</h5>
-        <p class="card-text">Whether you are selecting a car, a school for your child or a partner - we can
-            help you
-            make a rational choice.</p>
-        <a href="{{url_for('rules')}}" class="btn btn-primary" id="start-cta-button">Let's start</a>
-    </div>
+<div class="jumbotron">
+    <h1 class="display-4">Choose Smart</h1>
+    <p class="lead">Whether you are selecting a car, a school for your child or a partner
+        - we can help you make a rational choice.</p>
+    <hr class="my-4">
+    <p>Create your own comparison rules - prioritise what is important for you.</p>
+    <a href="{{url_for('rules')}}" class="btn btn-primary btn-lg" id="start-cta-button" role="button">Let's start</a>
 </div>
 
 {% endblock content %}
