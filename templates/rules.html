@@ -10,10 +10,9 @@
     {% for rule in rules %}
 
     <div class="rule" id="{{rule._id}}">
-        <span data-test="rule-name">{{rule.rule_name}}</span>
+        <a href="#" class="edit-rule" data-test="rule-name"
+            onclick="openRuleDetails(this.closest('div').id)">{{rule.rule_name}}</a>
         <span data-test="rule-update-time">{{rule.timestamp}}</span>
-        <input type="button" class="edit-rule btn btn-md btn-light" value="Edit"
-            onclick="openRuleDetails(this.closest('div').id)">
         <input type="button" class="delete-rule-button btn btn-md btn-light" onclick="deleteRule(this)" value="Delete">
     </div>
 
