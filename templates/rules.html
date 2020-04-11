@@ -7,16 +7,37 @@
 <button id="createRuleButton" type="button" class="btn btn-primary">Create</button>
 
 <div class="rules">
-    {% for rule in rules %}
 
-    <div class="rule" id="{{rule._id}}">
-        <a href="#" class="edit-rule" data-toggle="tooltip" data-placement="top" title="{{rule.timestamp}}"
-            data-test="rule-name" onclick="openRuleDetails(this.closest('div').id)">{{rule.rule_name}}</a>
-        <span data-test="rule-update-time">{{rule.timestamp}}</span> <input type="button"
-            class="delete-rule-button btn btn-md btn-light" onclick="deleteRule(this)" value="Delete">
-    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Rule Name</th>
+                <th scope="col">Last Updated</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    {% endfor %}
+            {% for rule in rules %}
+
+            <tr class="rule" id="{{rule._id}}" valign="middle">
+                <td>
+                    <a href="#" class="edit-rule" data-toggle="tooltip" data-placement="top" title="{{rule.timestamp}}"
+                        data-test="rule-name" onclick="openRuleDetails(this.closest('tr').id)">{{rule.rule_name}}</a>
+                </td>
+                <td>
+                    <span data-test="rule-update-time">{{rule.timestamp}}</span>
+                </td>
+                <td>
+                    <ion-icon name="trash-outline" size="large" class="delete-rule-button btn btn-md btn-light"
+                        onclick="deleteRule(this)"></ion-icon>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 
 <script type="text/javascript">
@@ -39,10 +60,10 @@
 
     function deleteRule(event) {
         {
-            const parent_div = event.closest("div")
+            const row = event.closest("tr")
             console.log('deleting closest...')
-            deleteRuleFromDatabase(parent_div.id)
-            parent_div.remove()
+            deleteRuleFromDatabase(row.id)
+            row.remove()
         }
     }
 
