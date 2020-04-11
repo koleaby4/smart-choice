@@ -1,6 +1,53 @@
+/*---- GLOBAL STYLES ---- */
+
+/* Roboto: clean and functional */
+@import url("https://fonts.googleapis.com/css?family=Roboto:300");
+
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+/* ---- COMMON ----  */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-shadow: none;
+}
+
+h1 {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 160%;
+}
+
+h2 {
+  font-size: 120%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+section * + * {
+  margin-top: 1em;
+}
+
+/* individual */
+
 #jumbotron {
   width: 40%;
-  height: 100%;
+  padding: 1em;
+  background-color: #fff;
 }
 
 .row {
