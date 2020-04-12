@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Comparison Rules</h1>
+<h1>Rules</h1>
 
 <button id="createRuleButton" type="button" class="btn btn-primary">Create</button>
 
@@ -11,7 +11,7 @@
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th scope="col">Rule Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Last Updated</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -29,7 +29,7 @@
                     <span data-test="rule-update-time">{{rule.timestamp}}</span>
                 </td>
                 <td>
-                    <ion-icon name="trash-outline" size="large" class="delete-rule-button btn btn-md btn-light"
+                    <ion-icon name="trash-outline" size="large" class="delete-rule btn btn-md btn-light"
                         onclick="deleteRule(this)"></ion-icon>
                 </td>
             </tr>

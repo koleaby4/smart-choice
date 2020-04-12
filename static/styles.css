@@ -66,4 +66,5 @@ section * + * {
 
 ion-icon[name="trash-outline"] {
   background-color: #fff;
+  color: #dc3545;
 }

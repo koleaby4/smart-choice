@@ -30,7 +30,7 @@ export const deleteRule = ruleNameToDelete =>
   cy.get('[data-test=rule-name]').each(rule => cy.wrap(rule).invoke('text')
     .then(ruleName => {
       if (ruleName.includes(ruleNameToDelete)) {
-        cy.contains(ruleName).parents('tr').find('[class~=delete-rule-button]').click()
+        cy.contains(ruleName).parents('tr').find('[class~=delete-rule]').click()
       }
     }))
 

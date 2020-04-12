@@ -27,8 +27,8 @@
                     <span>{{comparison.timestamp}}</span>
                 </td>
                 <td>
-                    <input type="button" class="delete-comparison-button btn btn-md btn-light"
-                        onclick="deleteComparison(this)" value="Delete">
+                    <ion-icon name="trash-outline" onclick="deleteComparison(this)" size="large"
+                        class="delete-comparison btn btn-md btn-light"></ion-icon>
                 </td>
             </tr>
             {% endfor %}

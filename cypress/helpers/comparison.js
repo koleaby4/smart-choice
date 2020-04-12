@@ -35,7 +35,7 @@ export const deleteComparisons = comparisonNameToDelete =>
     cy.get('[data-test=comparison-name]').each(comparison => cy.wrap(comparison).invoke('text')
         .then(comparisonName => {
             if (comparisonName.includes(comparisonNameToDelete)) {
-                cy.wrap(comparison).parents('tr').find('[class~=delete-comparison-button]').click()
+                cy.wrap(comparison).parents('tr').find('[class~=delete-comparison]').click()
             }
         }))
 
