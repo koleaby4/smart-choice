@@ -60,7 +60,8 @@ Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 
 1. [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
 2. [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
-3. [ionicons](https://ionicons.com/)
-4. Images: [Unsplash](https://unsplash.com/)
-5. CSS tricks:
+3. [Google fonts](https://fonts.google.com/)
+4. [ionicons](https://ionicons.com/)
+5. Images: [Unsplash](https://unsplash.com/)
+6. CSS tricks:
    1. [lobotomised owl](https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/)
