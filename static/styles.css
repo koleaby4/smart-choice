@@ -63,3 +63,7 @@ section * + * {
 .table th {
   vertical-align: middle;
 }
+
+ion-icon[name="trash-outline"] {
+  background-color: #fff;
+}
