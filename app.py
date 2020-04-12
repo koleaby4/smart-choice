@@ -58,7 +58,14 @@ def rules():
         mongo_helpers.upsert_rule(data, None)
         return redirect(url_for('rules'))
     elif request.method == 'GET':
-        return render_template('rules.html', rules=mongo_helpers.get_rules())
+        rules = format_timestamp(mongo_helpers.get_rules())
+        return render_template('rules.html', rules=rules)
+
+
+def format_timestamp(collection):
+    for item in collection:
+        item["timestamp"] = item["timestamp"].rpartition(':')[0]
+    return collection
 
 
 @app.route('/rules/<string:rule_id>', methods=['GET', 'POST', 'DELETE'])
@@ -100,11 +107,12 @@ def comparisons():
             **request.json, 'timestamp': string_timestamp()}
         return mongo_helpers.save_comparison(payload)
     if request.method == 'GET':
-        return render_template('comparisons.html', comparisons=mongo_helpers.get_comparisons())
+        comparisons = format_timestamp(mongo_helpers.get_comparisons())
+        return render_template('comparisons.html', comparisons=comparisons)
 
 
 def string_timestamp():
-    return str(datetime.datetime.now()).split('.')[0].replace('T', ' ')
+    return str(datetime.datetime.now())
 
 
 if __name__ == "__main__":

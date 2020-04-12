@@ -5,5 +5,4 @@ export const editRule = ruleName =>
 
 export const assertRuleName = (ruleIndex, expectedName) =>
   cy.get(".rule [data-test=rule-name]")
-    .eq(ruleIndex)
-    .should("contain", expectedName);
+    .eq(ruleIndex).invoke('text').should('eq', expectedName)
