@@ -7,17 +7,34 @@
 <button id="createComparisonButton" type="button" class="btn btn-primary">Create</button>
 
 <div class="comparisons">
-    {% for comparison in comparisons %}
 
-    <div class="comparison" id="{{comparison._id}}">
-        <span data-test="comparison-name">{{comparison.name}} - {{comparison.timestamp}}</span>
-        <input type="button" data-test="view-comparison-details" class="view-comparison btn btn-md btn-light"
-            value="View" onclick="viewComparison(this.closest('div').id)">
-        <input type="button" class="delete-comparison-button btn btn-md btn-light" onclick="deleteComparison(this)"
-            value="Delete">
-    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Last Updated</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comparison in comparisons %}
+            <tr class="comparison" id="{{comparison._id}}">
+                <td>
+                    <a href="#" data-test="comparison-name"
+                        onclick="viewComparison(this.closest('tr').id)">{{comparison.name}}</span>
+                </td>
+                <td>
+                    <span>{{comparison.timestamp}}</span>
+                </td>
+                <td>
+                    <input type="button" class="delete-comparison-button btn btn-md btn-light"
+                        onclick="deleteComparison(this)" value="Delete">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    {% endfor %}
 </div>
 
 <script type="text/javascript">
@@ -33,9 +50,9 @@
 
     function deleteComparison(event) {
         {
-            const parent_div = event.closest("div")
-            deleteComparisonFromDatabase(parent_div.id)
-            parent_div.remove()
+            const row = event.closest("tr")
+            deleteComparisonFromDatabase(row.id)
+            row.remove()
         }
     }
 

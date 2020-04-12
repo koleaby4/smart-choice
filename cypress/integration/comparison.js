@@ -75,10 +75,10 @@ describe("Users can create comparison", () => {
     assertTotal('28');
 
     saveComparison();
-
+    cy.log(`name: ${comparisonName}`)
     cy.contains(comparisonName).should('be.visible')
 
-    viewComparison()
+    viewComparison(comparisonName)
     assertOptionContains(0, 'Mercedes', 37)
     assertOptionContains(1, 'BMW', 28)
   });

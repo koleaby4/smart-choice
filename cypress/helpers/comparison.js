@@ -35,12 +35,12 @@ export const deleteComparisons = comparisonNameToDelete =>
     cy.get('[data-test=comparison-name]').each(comparison => cy.wrap(comparison).invoke('text')
         .then(comparisonName => {
             if (comparisonName.includes(comparisonNameToDelete)) {
-                cy.contains(comparisonName).parent().find('[class~=delete-comparison-button]').click()
+                cy.wrap(comparison).parents('tr').find('[class~=delete-comparison-button]').click()
             }
         }))
 
-export const viewComparison = (index = 0) =>
-    cy.get('[data-test=view-comparison-details]').eq(index).click()
+export const viewComparison = comparisonName =>
+    cy.contains(comparisonName).click()
 
 export const assertOptionContains = (index, name, totalScore) =>
     cy.get('tbody tr').eq(index).then(row => {
