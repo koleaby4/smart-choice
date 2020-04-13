@@ -38,5 +38,5 @@ export const deleteRule = ruleNameToDelete =>
 
 export const deleteLastCriterion = () =>
   cy
-    .get("[value=Delete]")
+    .get(".delete-row")
     .last().click();

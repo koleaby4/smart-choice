@@ -43,7 +43,7 @@
             `;
         cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
 
-        cols += '<td><ion-icon name="trash-outline" onclick="deleteRow(this)" size="large" class="delete-comparison btn btn-md btn-light" ></ion-icon></td>';
+        cols += '<td><ion-icon name="trash-outline" onclick="deleteRow(this)" size="large" class="delete-row btn btn-md btn-light" ></ion-icon></td>';
 
         newRow.innerHTML = cols;
         document.querySelector('#criteria_table tbody').appendChild(newRow)
