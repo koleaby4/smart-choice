@@ -70,17 +70,19 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5" style="text-align: left;">
-                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
+                    <td colspan="5">
+                        <input type="button" class="btn btn-lg btn-block btn-info" id="addrow" value="Add Row"
                             onclick="insertRow()" />
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="5" style="text-align: right;">
+                        <button class="btn btn-primary btn-lg" data-test="submit-button" type="submit">Submit</button>
+                    </td>
                 </tr>
             </tfoot>
         </table>
     </div>
-    <button data-test="submit-button" type="submit">Submit</button>
 
     {% if rule %}
     <!-- modifying existing rule -->
