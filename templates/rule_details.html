@@ -43,7 +43,7 @@
             `;
         cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
 
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+        cols += '<td><ion-icon name="trash-outline" onclick="deleteRow(this)" size="large" class="delete-comparison btn btn-md btn-light" ></ion-icon></td>';
 
         newRow.innerHTML = cols;
         document.querySelector('#criteria_table tbody').appendChild(newRow)
@@ -57,8 +57,8 @@
         <input id="rule_id" name="rule_id" type="hidden" value="">
         <input type="text" name="rule_name" id="rule_name" class="form-control" placeholder="rule name" required />
 
-        <table id="criteria_table" class="table criteria">
-            <thead>
+        <table id="criteria_table" class="table table-hover criteria">
+            <thead class="thead-light">
                 <tr>
                     <td>Criterion</td>
                     <td>Multiplier</td>
