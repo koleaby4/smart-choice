@@ -20,7 +20,7 @@
 
             {% for rule in rules %}
 
-            <tr class="rule" id="{{rule._id}}" valign="middle">
+            <tr class="rule" id="{{rule._id}}">
                 <td>
                     <a href="#" class="edit-rule" data-toggle="tooltip" data-placement="top" title="{{rule.timestamp}}"
                         data-test="rule-name" onclick="openRuleDetails(this.closest('tr').id)">{{rule.rule_name}}</a>
