@@ -11,6 +11,7 @@
 
     <select name="rules" class="custom-select" class="form-control col-sm-4" onchange="populateComparisonTable(this)"
         data-test="rules-list">
+        <option selected disabled hidden value=''>Please select a rule</option>
         {% for rule in rules %}
         <option value="{{rule._id}}">{{rule.rule_name}}</option>
         {% endfor %}
@@ -180,6 +181,12 @@
     function deleteRow(target) {
         target.closest('tr').remove()
     }
+
+    // select latest rule when page loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("[name='rules']").selectedIndex = 0;
+    });
+
 </script>
 <!-- </form> -->
 
