@@ -60,7 +60,7 @@
         selectedOption.setAttribute('rule_id', selectedRuleId)
         const selectedRule = getRuleById(selectedRuleId)
 
-        deleteRowsFromComparisonTable()
+        clearComparisonTable()
 
         const headerRow = document.querySelector('.comparison-header-row')
         const criteriaCount = selectedRule.criteria.length
@@ -78,7 +78,15 @@
         document.querySelector('#addrow').click();
     }
 
-    function deleteRowsFromComparisonTable() {
+    function clearComparisonTable() {
+
+        // reset header of the table
+        document.querySelectorAll('#comparison-table .comparison-header-row td').forEach(cell => cell.remove())
+        let firstHeader = document.createElement("td");
+        firstHeader.innerText = 'Options to compare'
+        document.querySelector('#comparison-table .comparison-header-row').appendChild(firstHeader)
+
+        // and remove previous content
         document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
     }
 
