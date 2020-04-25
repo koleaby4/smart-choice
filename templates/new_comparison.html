@@ -32,9 +32,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <button onclick="saveComparison()" class="btn btn-primary btn-lg"
-                            data-test="save-comparison">Save</button>
+                    <td colspan="5" style="text-align: right;">
+                        <button onclick="saveComparison()" class="btn btn-primary btn-lg" data-test="save-comparison"
+                            disabled>Save</button>
                     </td>
                 </tr>
             </tfoot>
@@ -78,9 +78,12 @@
         appendHeaderCell(getHeaderCell("Total"));
         appendHeaderCell(getHeaderCell("Actions"));
 
+        // enable buttons
         let addRowButton = document.querySelector('#addrow');
         addRowButton.removeAttribute("disabled")
         addRowButton.click();
+
+        document.querySelector('[data-test="save-comparison"]').removeAttribute("disabled")
     }
 
     let appendHeaderCell = headerCell =>
