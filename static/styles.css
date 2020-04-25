@@ -39,24 +39,26 @@ h2 {
   margin-bottom: 30px;
 }
 section * + * {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 /* individual */
 
 #jumbotron {
-  width: 40%;
-  padding: 1em;
+  width: 35%;
+  padding: 1rem;
+  margin-left: 2rem;
   background-color: #fff;
 }
 
 .row {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .choice-image {
-  width: 50%;
+  width: 60%;
+  margin: 0px;
 }
 
 .table td,
