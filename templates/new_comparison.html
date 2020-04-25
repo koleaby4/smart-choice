@@ -18,9 +18,9 @@
     </select>
     <div class="comparison-container">
         <table id="comparison-table" class="table" style="border: 1px solid black;">
-            <thead>
-                <tr class="comparison-header-row">
-                    <td>Options to compare</td>
+            <thead class="thead-light">
+                <tr scope="col" class="comparison-header-row">
+                    <th>Options to compare</td>
                 </tr>
             </thead>
             <tbody>
@@ -65,29 +65,40 @@
 
         clearComparisonTable()
 
-        const headerRow = document.querySelector('.comparison-header-row')
         const criteriaCount = selectedRule.criteria.length
         for (let i = 1; i <= criteriaCount; i++) {
-            let col = headerRow.insertCell(i);
+
             let ruleDetails = selectedRule.criteria[i - 1]
             let multiplier = ruleDetails.multiplier
-            col.setAttribute('multiplier', multiplier);
-            col.innerText = `${ruleDetails.criterion}\n(x${multiplier})`;
+
+            let headerCell = getHeaderCell(`${ruleDetails.criterion}\n(x${multiplier})`)
+            headerCell.setAttribute('multiplier', multiplier);
+            appendHeaderCell(headerCell);
         }
 
-        let col = headerRow.insertCell(selectedRule.criteria.length + 1);
-        col.innerText = 'Total';
+        appendHeaderCell(getHeaderCell("Total"));
+        appendHeaderCell(getHeaderCell("Actions"));
 
         document.querySelector('#addrow').click();
+    }
+
+    let appendHeaderCell = headerCell =>
+        document.querySelector('.comparison-header-row').appendChild(headerCell);
+
+    function getHeaderCell(innerText) {
+        let headerCell = document.createElement("th");
+        headerCell.innerText = innerText;
+        headerCell.setAttribute('scope', "col");
+        return headerCell;
     }
 
     function clearComparisonTable() {
 
         // reset header of the table
-        document.querySelectorAll('#comparison-table .comparison-header-row td').forEach(cell => cell.remove())
-        let firstHeader = document.createElement("td");
-        firstHeader.innerText = 'Options to compare'
-        document.querySelector('#comparison-table .comparison-header-row').appendChild(firstHeader)
+        document.querySelectorAll('#comparison-table .comparison-header-row th')
+            .forEach(cell => cell.remove())
+
+        appendHeaderCell(getHeaderCell("Options to compare"));
 
         // and remove previous content
         document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
@@ -177,7 +188,7 @@
 
     function applyWeightedToCell(cell) {
         const score = parseInt(cell.querySelector('select').value);
-        const weight = parseInt(cell.closest('table').querySelectorAll('thead td')[cell.cellIndex].getAttribute('multiplier'));
+        const weight = parseInt(cell.closest('table').querySelectorAll('thead th')[cell.cellIndex].getAttribute('multiplier'));
         cell.querySelector('[name=weighted_score]').innerText = score * weight;
 
     }
