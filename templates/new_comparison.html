@@ -27,8 +27,8 @@
             <tfoot>
                 <tr>
                     <td colspan="5" style="text-align: left;">
-                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row"
-                            onclick="insertRow()" />
+                        <input type="button" class="btn btn-lg btn-block btn-info" id="addrow" value="Add Row"
+                            onclick="insertRow()" disabled />
                     </td>
                 </tr>
                 <tr>
@@ -78,7 +78,9 @@
         appendHeaderCell(getHeaderCell("Total"));
         appendHeaderCell(getHeaderCell("Actions"));
 
-        document.querySelector('#addrow').click();
+        let addRowButton = document.querySelector('#addrow');
+        addRowButton.removeAttribute("disabled")
+        addRowButton.click();
     }
 
     let appendHeaderCell = headerCell =>
