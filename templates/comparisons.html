@@ -2,61 +2,62 @@
 
 {% block content %}
 
-<h1>On Comparisons page</h1>
+<h1>Comparisons</h1>
+<h5>Compare the options using the rules you defined.</h3>
 
-<button id="createComparisonButton" type="button" class="btn btn-primary btn-lg">Create</button>
+    <button id="createComparisonButton" type="button" class="btn btn-primary btn-lg">Create</button>
 
-<div class="comparisons">
+    <div class="comparisons">
 
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Last Updated</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for comparison in comparisons %}
-            <tr class="comparison" id="{{comparison._id}}">
-                <td>
-                    <a href="#" data-test="comparison-name"
-                        onclick="viewComparison(this.closest('tr').id)">{{comparison.name}}</span>
-                </td>
-                <td>
-                    <span>{{comparison.timestamp}}</span>
-                </td>
-                <td>
-                    <ion-icon name="trash-outline" onclick="deleteComparison(this)" size="large"
-                        class="delete-comparison btn btn-md btn-light"></ion-icon>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comparison in comparisons %}
+                <tr class="comparison" id="{{comparison._id}}">
+                    <td>
+                        <a href="#" data-test="comparison-name"
+                            onclick="viewComparison(this.closest('tr').id)">{{comparison.name}}</span>
+                    </td>
+                    <td>
+                        <span>{{comparison.timestamp}}</span>
+                    </td>
+                    <td>
+                        <ion-icon name="trash-outline" onclick="deleteComparison(this)" size="large"
+                            class="delete-comparison btn btn-md btn-light"></ion-icon>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-</div>
+    </div>
 
-<script type="text/javascript">
-    document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
+    <script type="text/javascript">
+        document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
 
-    function viewComparison(comparison_id) {
-        location.href = `/comparisons/${comparison_id}`
-    }
-
-    function deleteComparisonFromDatabase(comparison_id) {
-        fetch(`/comparisons/${comparison_id}`, { method: 'delete' })
-    }
-
-    function deleteComparison(event) {
-        {
-            const row = event.closest("tr")
-            deleteComparisonFromDatabase(row.id)
-            row.remove()
+        function viewComparison(comparison_id) {
+            location.href = `/comparisons/${comparison_id}`
         }
-    }
 
-</script>
+        function deleteComparisonFromDatabase(comparison_id) {
+            fetch(`/comparisons/${comparison_id}`, { method: 'delete' })
+        }
+
+        function deleteComparison(event) {
+            {
+                const row = event.closest("tr")
+                deleteComparisonFromDatabase(row.id)
+                row.remove()
+            }
+        }
+
+    </script>
 
 
-{% endblock content %}
+    {% endblock content %}
