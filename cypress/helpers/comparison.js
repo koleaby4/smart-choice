@@ -22,12 +22,13 @@ export const selectScores = scores => {
     }
 }
 
-export const saveComparison = () =>
+export const saveComparison = () => {
     cy.get('[data-test=save-comparison]')
-        .scrollIntoView()
         .should('be.visible')
-        .click()
-        .then(() => cy.location('pathname').should('eq', '/comparisons'))
+        .click({ force: true })
+
+    cy.location('pathname').should('eq', '/comparisons')
+}
 
 
 export const clickCreateComparisonButton = () =>
