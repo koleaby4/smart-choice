@@ -3,71 +3,73 @@
 {% block content %}
 
 <h1>Rules</h1>
+<h5>Create rules - outline and prioritise what is more important to you.</h3>
 
-<button id="createRuleButton" type="button" class="btn btn-primary btn-lg">Create</button>
+    <button id="createRuleButton" type="button" class="btn btn-primary btn-lg">Create</button>
 
-<div class="rules">
+    <div class="rules">
 
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Last Updated</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            {% for rule in rules %}
+                {% for rule in rules %}
 
-            <tr class="rule" id="{{rule._id}}">
-                <td>
-                    <a href="#" class="edit-rule" data-toggle="tooltip" data-placement="top" title="{{rule.timestamp}}"
-                        data-test="rule-name" onclick="openRuleDetails(this.closest('tr').id)">{{rule.rule_name}}</a>
-                </td>
-                <td>
-                    <span data-test="rule-update-time">{{rule.timestamp}}</span>
-                </td>
-                <td>
-                    <ion-icon name="trash-outline" size="large" class="delete-rule btn btn-md btn-light"
-                        onclick="deleteRule(this)"></ion-icon>
-                </td>
-            </tr>
+                <tr class="rule" id="{{rule._id}}">
+                    <td>
+                        <a href="#" class="edit-rule" data-toggle="tooltip" data-placement="top"
+                            title="{{rule.timestamp}}" data-test="rule-name"
+                            onclick="openRuleDetails(this.closest('tr').id)">{{rule.rule_name}}</a>
+                    </td>
+                    <td>
+                        <span data-test="rule-update-time">{{rule.timestamp}}</span>
+                    </td>
+                    <td>
+                        <ion-icon name="trash-outline" size="large" class="delete-rule btn btn-md btn-light"
+                            onclick="deleteRule(this)"></ion-icon>
+                    </td>
+                </tr>
 
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
 
-</div>
+    </div>
 
-<script type="text/javascript">
-    document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
+    <script type="text/javascript">
+        document.getElementById("createRuleButton").onclick = () => location.href = `/rules/0`
 
-    function openRuleDetails(rule_id) {
-        location.href = `/rules/${rule_id}`
-    }
-
-    function deleteRuleFromDatabase(rule_id) {
-        console.log(`trying to delete ${rule_id}`)
-        let outcome
-
-        let url = `/rules/${rule_id}`
-        console.log(url)
-        fetch(url, { method: 'delete' })
-            .then(response => response.json())
-            .then(outcome => console.log(outcome))
-    }
-
-    function deleteRule(event) {
-        {
-            const row = event.closest("tr")
-            console.log('deleting closest...')
-            deleteRuleFromDatabase(row.id)
-            row.remove()
+        function openRuleDetails(rule_id) {
+            location.href = `/rules/${rule_id}`
         }
-    }
 
-</script>
+        function deleteRuleFromDatabase(rule_id) {
+            console.log(`trying to delete ${rule_id}`)
+            let outcome
+
+            let url = `/rules/${rule_id}`
+            console.log(url)
+            fetch(url, { method: 'delete' })
+                .then(response => response.json())
+                .then(outcome => console.log(outcome))
+        }
+
+        function deleteRule(event) {
+            {
+                const row = event.closest("tr")
+                console.log('deleting closest...')
+                deleteRuleFromDatabase(row.id)
+                row.remove()
+            }
+        }
+
+    </script>
 
 
-{% endblock content %}
+    {% endblock content %}
