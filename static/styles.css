@@ -83,3 +83,13 @@ ion-icon[name="trash-outline"] {
   width: 60%;
   margin: 0px;
 }
+
+/* == new_comparison == */
+
+[name="weighted_score"] {
+  display: none;
+}
+
+table select.custom-select {
+  width: 75px;
+}

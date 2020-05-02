@@ -9,7 +9,7 @@
     <input type="text" name="comparison_name" id="comparison_name" class="form-control" placeholder="comparison name"
         required />
 
-    <select name="rules" class="custom-select" class="form-control col-sm-4" onchange="populateComparisonTable(this)"
+    <select name="rules" class="custom-select" class="form-control" onchange="populateComparisonTable(this)"
         data-test="rules-list">
         <option selected disabled hidden value=''>Please select a rule</option>
         {% for rule in rules %}
@@ -70,13 +70,13 @@
             let ruleDetails = selectedRule.criteria[i - 1]
             let multiplier = ruleDetails.multiplier
 
-            let headerCell = getHeaderCell(`${ruleDetails.criterion}\n(x${multiplier})`)
+            let headerCell = createHeaderCell(`${ruleDetails.criterion}`)
             headerCell.setAttribute('multiplier', multiplier);
             appendHeaderCell(headerCell);
         }
 
-        appendHeaderCell(getHeaderCell("Total"));
-        appendHeaderCell(getHeaderCell("Actions"));
+        appendHeaderCell(createHeaderCell("Total"));
+        appendHeaderCell(createHeaderCell("Actions"));
 
         // enable buttons
         let addRowButton = document.querySelector('#addrow');
@@ -92,7 +92,7 @@
     let appendHeaderCell = headerCell =>
         document.querySelector('.comparison-header-row').appendChild(headerCell);
 
-    function getHeaderCell(innerText) {
+    function createHeaderCell(innerText) {
         let headerCell = document.createElement("th");
         headerCell.innerText = innerText;
         headerCell.setAttribute('scope', "col");
@@ -105,7 +105,7 @@
         document.querySelectorAll('#comparison-table .comparison-header-row th')
             .forEach(cell => cell.remove())
 
-        appendHeaderCell(getHeaderCell("Options to compare"));
+        appendHeaderCell(createHeaderCell("Options to compare"));
 
         // and remove previous content
         document.querySelectorAll('#comparison-table tbody tr').forEach(row => row.remove())
@@ -122,7 +122,7 @@
         for (let i = 0; i < criteria.length; i++) {
             cols += `
                 <td>
-                    <select name="${criteria[i]['criterion']}" class="form-control col-sm-4 custom-select" onchange="calculateScore(this)">
+                    <select name="${criteria[i]['criterion']}" class="form-control custom-select" onchange="calculateScore(this)">
                         <option value="0" selected disabled>?</option>
                         <option value="5">5</option>
                         <option value="4">4</option>
