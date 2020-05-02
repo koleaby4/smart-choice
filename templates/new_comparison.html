@@ -136,7 +136,7 @@
 
         }
         cols += '<td><span name="total">0</span></td>';
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete" onclick="deleteRow(this)"></td>';
+        cols += '<td><ion-icon name="trash-outline" size="large" class="delete-option btn btn-md btn-light" onclick="deleteRow(this)"></ion-icon></td>';
 
         newRow.innerHTML = cols;
         document.querySelector('#comparison-table tbody').appendChild(newRow)
