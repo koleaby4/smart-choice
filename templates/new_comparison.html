@@ -83,7 +83,10 @@
         addRowButton.removeAttribute("disabled")
         addRowButton.click();
 
-        document.querySelector('[data-test="save-comparison"]').removeAttribute("disabled")
+        document.querySelector('[data-test="save-comparison"]').removeAttribute("disabled");
+
+        // adjust spacing for table footer
+        document.querySelectorAll('tfoot td').forEach(td => td.setAttribute("colspan", criteriaCount + 3))
     }
 
     let appendHeaderCell = headerCell =>
