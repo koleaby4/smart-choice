@@ -27,8 +27,8 @@ h6 {
 }
 
 h1 {
-  margin: 0 auto;
-  text-align: center;
+  margin-top: 1rem;
+  text-align: left;
 }
 
 h2 {
@@ -36,18 +36,20 @@ h2 {
   margin-bottom: 30px;
 }
 
+h5 {
+  text-align: left;
+}
+
 section {
   position: relative;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 section > button {
   position: absolute;
   right: 0;
   top: 0;
-}
-
-section * + * {
-  margin-top: 1rem;
 }
 
 .table td,
@@ -61,15 +63,6 @@ ion-icon[name="trash-outline"] {
   color: #dc3545;
 }
 
-/* Headers */
-
-h1 {
-  margin: 1rem;
-}
-
-h5 {
-  text-align: center;
-}
 /* individual components */
 
 /* == index.html == */
