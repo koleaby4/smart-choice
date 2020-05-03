@@ -3,7 +3,7 @@ from flask import Flask, request, url_for, redirect, render_template
 import mongo_helpers
 import datetime
 import json
-import pdb
+import logging
 
 app = Flask(__name__)
 
@@ -105,7 +105,9 @@ def comparisons():
     if request.method == 'POST':
         payload = {
             **request.json, 'timestamp': string_timestamp()}
-        return mongo_helpers.save_comparison(payload)
+        response = mongo_helpers.save_comparison(payload)
+        logging.debug(f"!!! {response}")
+        return response
     if request.method == 'GET':
         comparisons = format_timestamp(mongo_helpers.get_comparisons())
         return render_template('comparisons.html', comparisons=comparisons)

@@ -70,7 +70,7 @@ def save_comparison(data):
     if outcome.acknowledged:
         return {'status': 201, "message": f'comparison with id {outcome.inserted_id} was created'}
     else:
-        return {'status': 500, "message": f'Failed saving comparison with payload:\n{json.dumps(payload, indent=4)}'}
+        return {'status': 500, "message": f'Failed saving comparison with payload:\n{json.dumps(outcome, indent=4)}'}
 
 
 def delete_rule(id):

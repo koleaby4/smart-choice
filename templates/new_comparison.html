@@ -44,9 +44,9 @@
 <script>
 
     function getRuleById(rule_id) {
-        const selectedRule = {{ rules | tojson
-    }}.find((rule) => rule._id.includes(rule_id))
-    return selectedRule
+        const rules_json = JSON.parse('{{ rules | tojson}}')
+        const selectedRule = rules_json.find((rule) => rule._id.includes(rule_id))
+        return selectedRule
 
     }
 
