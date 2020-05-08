@@ -40,21 +40,29 @@ Open terminal window and execute `npm`.
 # Execute cypress tests
 
 1. open terminal window
-2. `cd` into project folder
-3. execute `npm run cypress:open`
+1. `cd` into project folder
+1. execute th following in command line: `npm run cypress:open`
+1. click `Run all spec` button
 
 
-# Create content
+# Create demo content
 
-Windows: `set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
-Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+1. set up connection to MongoDb:
+    - Windows: `set "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+    - Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
+1. execute th following in command line: `python mongo_create_content.py`
 
-`python mongo_create_content.py`
 
 # Run application
 
 1. in command line terminal navigate to project folder
 2. execute `flask run`
+
+# ToDo:
+describe deployment to Heroku
+
+# ToDo:
+describe DB design decisions
 
 # 3rd party resources
 
@@ -63,5 +71,3 @@ Mac: `export "MONGO_CONNECTION_STRING=<connection_string_for_mongo_database>"`
 3. [Google fonts](https://fonts.google.com/)
 4. [ionicons](https://ionicons.com/)
 5. Images: [Unsplash](https://unsplash.com/)
-6. CSS tricks:
-   1. [lobotomised owl](https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/)
