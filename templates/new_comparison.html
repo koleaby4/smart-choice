@@ -29,7 +29,7 @@
                 <tr>
                     <td colspan="5" style="text-align: left;">
                         <input type="button" class="btn btn-lg btn-block btn-info" id="addrow" value="Add Row"
-                            onclick="insertRow()" disabled />
+                            onclick="insertRowIntoComparisonTable()" disabled />
                     </td>
                 </tr>
                 <tr>
@@ -43,7 +43,6 @@
     </div>
 </div>
 <script>
-
     function getRuleById(rule_id) {
         const rules_json = JSON.parse('{{ rules | tojson}}')
         const selectedRule = rules_json.find((rule) => rule._id.includes(rule_id))
@@ -57,6 +56,8 @@
         return getRuleById(rule_id);
     }
 
+    /* wipe out existing content of comparison table
+        and re-populate its headers with details from selected rule*/
     function populateComparisonTable(selectedOption) {
         const selectedRuleId = selectedOption.value
 
@@ -93,6 +94,7 @@
     let appendHeaderCell = headerCell =>
         document.querySelector('.comparison-header-row').appendChild(headerCell);
 
+    /* create `th` element with specified text */
     function createHeaderCell(innerText) {
         let headerCell = document.createElement("th");
         headerCell.innerText = innerText;
@@ -113,7 +115,7 @@
     }
 
     let counter = 0;
-    function insertRow() {
+    function insertRowIntoComparisonTable() {
         let newRow = document.createElement("tr");
         const selectedRule = getSelectedRule();
         const criteria = selectedRule.criteria;
@@ -212,12 +214,11 @@
         target.closest('tr').remove()
     }
 
-    // select latest rule when page loaded
+    /* select latest rule when page loaded */
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("[name='rules']").selectedIndex = 0;
     });
 
 </script>
-<!-- </form> -->
 
 {% endblock %}
