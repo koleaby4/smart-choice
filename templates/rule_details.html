@@ -2,7 +2,9 @@
 
 {% block content %}
 
-<h1>Rule details</h1>
+<div class="container">
+    <h1>Rule details</h1>
+</div>
 
 <script>
     let counter = 0
@@ -32,23 +34,23 @@
         let cols = `<td><input type="text" class="form-control" required name="name${counter}"/></td>`;
         counter += 1
         cols += `
-                <td>
-                    <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
+        <td>
+            <select name="multiplier${counter}" class="custom-select" class="form-control col-sm-4">
                         <option value="5" selected>5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
                         <option value="2">2</option>
                         <option value="1">1</option>
-                    </select>
-                </td>
-            `;
-        cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
+                        </select>
+                        </td>
+                        `;
+                        cols += `<td><input type="text" class="form-control" name="note${counter}"/></td>`;
 
-        cols += '<td><ion-icon name="trash-outline" onclick="deleteRow(this)" size="large" class="delete-row btn btn-md btn-light" ></ion-icon></td>';
+                        cols += '<td><ion-icon name="trash-outline" onclick="deleteRow(this)" size="large" class="delete-row btn btn-md btn-light" ></ion-icon></td>';
 
-        newRow.innerHTML = cols;
-        document.querySelector('#criteria_table tbody').appendChild(newRow)
-        document.querySelector('#criteria_table tbody').lastChild.querySelector('[name*=name]').focus()
+                        newRow.innerHTML = cols;
+                        document.querySelector('#criteria_table tbody').appendChild(newRow)
+                        document.querySelector('#criteria_table tbody').lastChild.querySelector('[name*=name]').focus()
     }
 </script>
 
