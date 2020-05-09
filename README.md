@@ -64,6 +64,15 @@ describe deployment to Heroku
 # ToDo:
 describe DB design decisions
 
+# Known limitations
+
+1. Current implementation targets larger screen sizes. With the focus of the project being back-end,<br>
+we deprioritised front-end works for mobile devices.<br>
+[Issue 37](https://github.com/koleaby4/smart-choice/issues/37) was raised to address this limitation in the future.
+1. Certain parts of functionality will not work on Internet Explorer due to the fact <br>
+that we are using JS arrow-functions, which are currently [not supported by IE browser](https://caniuse.com/#feat=arrow-functions).<br>
+We raised [issue 27](https://github.com/koleaby4/smart-choice/issues/27) to address this limitation in the future.
+
 # 3rd party resources
 
 1. [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
