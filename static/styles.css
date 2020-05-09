@@ -84,6 +84,13 @@ ion-icon[name="trash-outline"] {
   margin: 0px;
 }
 
+/* == rules == */
+
+ion-icon[name="pencil-outline"] {
+  background-color: #fff;
+  color: #007bff;
+}
+
 /* == new_comparison == */
 
 [name="weighted_score"] {

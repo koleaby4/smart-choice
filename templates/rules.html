@@ -31,6 +31,8 @@
                         <span data-test="rule-update-time">{{rule.timestamp}}</span>
                     </td>
                     <td>
+                        <ion-icon name="pencil-outline" size="large" class="edit-rule btn btn-md btn-light"
+                            onclick="editRule(this)"></ion-icon>
                         <ion-icon name="trash-outline" size="large" class="delete-rule btn btn-md btn-light"
                             onclick="deleteRule(this)"></ion-icon>
                     </td>
@@ -67,6 +69,13 @@
                 console.log('deleting closest...')
                 deleteRuleFromDatabase(row.id)
                 row.remove()
+            }
+        }
+
+        function editRule(event) {
+            {
+                const ruleRow = event.closest("tr")
+                location.href = `/rules/${ruleRow.id}`
             }
         }
 
