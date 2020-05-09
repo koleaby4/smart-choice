@@ -76,7 +76,9 @@ We raised [issue 27](https://github.com/koleaby4/smart-choice/issues/27) to addr
 # 3rd party resources
 
 1. [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
-2. [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
-3. [Google fonts](https://fonts.google.com/)
-4. [ionicons](https://ionicons.com/)
-5. Images: [Unsplash](https://unsplash.com/)
+1. [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
+1. [Google fonts](https://fonts.google.com/)
+1. [ionicons](https://ionicons.com/)
+1. Images: [Unsplash](https://unsplash.com/)
+1. [W3 css validator](https://jigsaw.w3.org/css-validator/validator)
+1. [W3 html validator](https://validator.w3.org/)
