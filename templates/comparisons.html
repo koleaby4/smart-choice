@@ -28,6 +28,8 @@
                         <span>{{comparison.timestamp}}</span>
                     </td>
                     <td>
+                        <ion-icon name="eye-outline" size="large" class="view-comparison btn btn-md btn-light"
+                            onclick="viewComparison(this.closest('tr').id)"></ion-icon>
                         <ion-icon name="trash-outline" onclick="deleteComparison(this)" size="large"
                             class="delete-comparison btn btn-md btn-light"></ion-icon>
                     </td>

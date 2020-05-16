@@ -98,6 +98,17 @@ ion-icon[name="pencil-outline"] {
   color: #007bff;
 }
 
+#rule_name{
+  margin-bottom: 1rem;
+}
+
+/* == comparisons == */
+
+ion-icon.view-comparison{
+  background-color: #fff;
+  color: #007bff;
+}
+
 /* == new_comparison == */
 
 [name="weighted_score"] {
