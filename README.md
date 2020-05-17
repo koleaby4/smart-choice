@@ -1,5 +1,5 @@
-# choice-guide
-Web app, helping you to choose the best option using your own weighted rules
+# Overview
+Smart Choice is a web application, which can help to choose the best option based on your own weighted rules.
 
 More info about decision-making matrix can be in [weighted decision matrix prioritization](https://airfocus.io/blog/weighted-decision-matrix-prioritization/) article
 
@@ -11,11 +11,15 @@ Windows:
     `env\Scripts\activate.bat`
 
 Mac:
-    `TBC`
+    `source env/bin/activate`
+
+For further information see [venv documentation](https://docs.python.org/3/library/venv.html)
+
+## Install dependencies
 
 `pip install -r requirements.txt`
 
-# Run Flask app
+## Run Flask app
 
 Windows:
     `set "IP=0.0.0.0"`
@@ -30,15 +34,14 @@ Mac:
 
 `python app.py`
 
-# Install dependencies
+
+## Execute cypress tests
 
 Prerequisites:
-Make sure `npm` ins installed (see [these steps](https://www.npmjs.com/get-npm) for details).
+* Make sure `npm` is installed (see [these steps](https://www.npmjs.com/get-npm) for details).
+* Open terminal window and execute `npm`.
 
-Open terminal window and execute `npm`.
-
-# Execute cypress tests
-
+Run tests in Cypress UI:
 1. open terminal window
 1. `cd` into project folder
 1. execute th following in command line: `npm run cypress:open`
@@ -53,13 +56,15 @@ Open terminal window and execute `npm`.
 1. execute th following in command line: `python mongo_create_content.py`
 
 
-# Run application
+## Run application
 
 1. in command line terminal navigate to project folder
 2. execute `flask run`
 
-# ToDo:
-describe deployment to Heroku
+# Deployment to Heroku
+
+We used Heroku as a deployment and hosting platform.
+Deployment and configuration steps were taken from this [Heroku: Getting started with Python](https://devcenter.heroku.com/articles/getting-started-with-python) tutorial.
 
 # ToDo:
 describe DB design decisions
