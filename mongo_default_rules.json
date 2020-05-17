@@ -1,6 +1,6 @@
 [
   {
-    "rule_name": "Cars comparison (example)",
+    "rule_name": "Cars comparison (Demo)",
     "timestamp": "2019-01-24 22:08:12.12345",
     "criteria": [
       {
@@ -31,7 +31,7 @@
     ]
   },
   {
-    "rule_name": "Jobs comparison (example)",
+    "rule_name": "Jobs comparison (Demo)",
     "timestamp": "2019-08-01 22:08:12.12345",
     "criteria": [
       {
