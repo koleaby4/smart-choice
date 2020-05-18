@@ -41,25 +41,9 @@
     </div>
 
     <script type="text/javascript">
-        document.getElementById("createComparisonButton").onclick = () => location.href = '{{url_for("new_comparison")}}'
-
-        function viewComparison(comparison_id) {
-            location.href = `/comparisons/${comparison_id}`
-        }
-
-        function deleteComparisonFromDatabase(comparison_id) {
-            fetch(`/comparisons/${comparison_id}`, { method: 'delete' })
-        }
-
-        function deleteComparison(event) {
-            {
-                const row = event.closest("tr")
-                deleteComparisonFromDatabase(row.id)
-                row.remove()
-            }
-        }
-
+        document.getElementById("createComparisonButton").onclick = () => location.href = '/comparison'
     </script>
 
+    <script src="{{url_for('static', filename='comparisons.js')}}"></script>
 
     {% endblock content %}
