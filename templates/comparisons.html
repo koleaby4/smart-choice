@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Comparisons</h1>
-<h5>Compare the options using the rules you defined.</h3>
+<h5>Compare the options using the rules you defined.</h5>
 
     <button id="createComparisonButton" type="button" class="btn btn-primary btn-lg">Create</button>
 
@@ -22,7 +22,7 @@
                 <tr class="comparison" id="{{comparison._id}}">
                     <td>
                         <a href="#" data-test="comparison-name"
-                            onclick="viewComparison(this.closest('tr').id)">{{comparison.name}}</span>
+                            onclick="viewComparison(this.closest('tr').id)">{{comparison.name}}</a>
                     </td>
                     <td>
                         <span>{{comparison.timestamp}}</span>
