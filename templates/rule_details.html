@@ -6,7 +6,6 @@
     <h1>Rule details</h1>
 </div>
 
-<script src="{{url_for('static', filename='rule_details.js')}}"></script>
 
 <form action="{{url_for('rules')}}" method="post">
     <div class="container">
@@ -62,5 +61,7 @@
     {% endif %}
 
 </form>
+
+<script src="{{url_for('static', filename='rule_details.js')}}"></script>
 
 {% endblock content %}
