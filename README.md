@@ -1,7 +1,7 @@
 # Overview
 Smart Choice is a web application, which can help to choose the best option based on your own weighted rules.
 
-More info about decision-making matrix can be in [weighted decision matrix prioritization](https://airfocus.io/blog/weighted-decision-matrix-prioritization/) article
+More info about decision-making matrix can be found in [weighted decision matrix prioritization](https://airfocus.io/blog/weighted-decision-matrix-prioritization/) article.
 
 # Run locally
 
