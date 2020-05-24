@@ -131,3 +131,14 @@ h6 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.help-page-image {
+  display: block;
+  margin-left: 1rem;
+  /* margin-right: auto; */
+  width: 50%;
+
+  border: 3px solid #98bde4;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
