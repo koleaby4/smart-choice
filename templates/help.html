@@ -6,7 +6,7 @@
 <h5 class="help-header">Overview</h5>
 <section>
     <p>
-        Smart Choice is a web application, which can help to choose the best option based on your own weighted rules.<br>
+        Smart Choice is a web application, which can help to choose the best option based on our own weighted rules.<br>
         This application is based on the framework called "Weighted Decision Making Matrix". More information about this framework can be found in  <a href="https://airfocus.io/blog/weighted-decision-matrix-prioritization/"> weighted decision matrix prioritization</a> article.
     </p>
 </section>
@@ -15,17 +15,21 @@
 
 <section>
 
-    <h6>1. Create your rules</h6>
-    <p>The fisrt step in your journey is to create a rule, which outlines the criteria to be used for comparing options and on their weights / relative importance.</p>
+    <h6>1. Create the rule</h6>
+    <p>The first step in the journey is to create a rule, which outlines the criteria to be used for comparing options and on their weights / relative importance.</p>
 
-    <p>Navigate to <a href="{{url_for('rules')}}">Rules</a> page and click "Create" button to start creating your new rule:</p>
+    <p>Navigate to <a href="{{url_for('rules')}}">Rules</a> page and click "Create" button to start creating the new rule:</p>
     <img class="help-page-image" src="{{url_for('static', filename='create_rule.jpg')}}" alt="create rule screenshot">
 
-    <p>Add the criteria which you want to use and assign weights based on their relative importance:</p>
+    <p>Add the criteria which we want to use and assign weights based on their relative importance:</p>
     <img class="help-page-image" src="{{url_for('static', filename='rule_details.jpg')}}" alt="rule details screenshot">
 
-    <h6>Create a comparison</h6>
+    <p>Save the rule.</p>
 
+    <h6>2. Create the comparison</h6>
+
+    <p>Now that our rule is ready - navigate to <a href="{{url_for('comparisons')}}">Comparisons</a> page and click "Create" button to create new comparison:</p>
+    <img class="help-page-image" src="{{url_for('static', filename='create_c.jpg')}}" alt="create rule screenshot">
     <h6>See the comparison results</h6>
 
 </section>
