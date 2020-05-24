@@ -69,6 +69,14 @@ ion-icon[name="trash-outline"] {
 
 /* individual components */
 
+
+/* == base.html == */
+
+a.navbar-brand img{
+  width: 50px;
+  height: 50px;
+}
+
 /* == index.html == */
 
 #jumbotron {
