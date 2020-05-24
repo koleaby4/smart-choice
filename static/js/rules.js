@@ -7,11 +7,9 @@ function openRuleDetails(rule_id) {
 }
 
 function deleteRuleFromDatabase(rule_id) {
-    console.log(`trying to delete ${rule_id}`)
     let outcome
 
     let url = `/rules/${rule_id}`
-    console.log(url)
     fetch(url, { method: 'delete' })
         .then(response => response.json())
         .then(outcome => console.log(outcome))
@@ -21,7 +19,6 @@ function deleteRuleFromDatabase(rule_id) {
 function deleteRule(event) {
     {
         const row = event.closest("tr")
-        console.log('deleting closest...')
         deleteRuleFromDatabase(row.id)
         row.remove()
     }
