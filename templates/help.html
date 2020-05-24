@@ -7,7 +7,9 @@
 <section>
     <p>
         Smart Choice is a web application, which can help to choose the best option based on our own weighted rules.<br>
-        This application is based on the framework called "Weighted Decision Making Matrix". More information about this framework can be found in  <a href="https://airfocus.io/blog/weighted-decision-matrix-prioritization/"> weighted decision matrix prioritization</a> article.
+        This application is based on the framework called "Weighted Decision Making Matrix".<br>
+        More information about this framework can be found in  <a href="https://airfocus.io/blog/weighted-decision-matrix-prioritization/">
+            weighted decision matrix prioritization</a> article.
     </p>
 </section>
 
@@ -16,7 +18,8 @@
 <section>
 
     <h6>1. Create the rule</h6>
-    <p>The first step in the journey is to create a rule, which outlines the criteria to be used for comparing options and on their weights / relative importance.</p>
+    <p>The first step in the journey is to create a rule, which outlines the criteria to be used <br>
+        for comparing options and on their weights / relative importance.</p>
 
     <p>Navigate to <a href="{{url_for('rules')}}">Rules</a> page and click "Create" button to start creating the new rule:</p>
     <img class="help-page-image" src="{{url_for('static', filename='create_rule.jpg')}}" alt="create rule screenshot">
@@ -28,9 +31,21 @@
 
     <h6>2. Create the comparison</h6>
 
-    <p>Now that our rule is ready - navigate to <a href="{{url_for('comparisons')}}">Comparisons</a> page and click "Create" button to create new comparison:</p>
-    <img class="help-page-image" src="{{url_for('static', filename='create_c.jpg')}}" alt="create rule screenshot">
-    <h6>See the comparison results</h6>
+    <p>Now that our rule is ready - navigate to <a href="{{url_for('comparisons')}}">Comparisons</a> page and click "Create" button:</p>
+    <img class="help-page-image" src="{{url_for('static', filename='create_comparison.jpg')}}" alt="create comparison screenshot">
+
+    <p>Give the comparison a meaningful name and select the rule we just created:</p>
+    <img class="help-page-image" src="{{url_for('static', filename='comparison_select_rule.jpg')}}" alt="select rule on comparison page screenshot">
+
+    <p>Fill the options and rate them based on the criteria from our rule:</p>
+    <img class="help-page-image" src="{{url_for('static', filename='comparison_fill_options.jpg')}}" alt="fill comparison options screenshot">
+
+    <p>Save the comparison.</p>
+
+    <h6>3. See the comparison details</h6>
+
+    <p>From <a href="{{url_for('comparisons')}}">Comparisons</a> page click on the newly created comparison to see the details:</p>
+    <img class="help-page-image" src="{{url_for('static', filename='comparison_details.jpg')}}" alt="comparison details screenshot">
 
 </section>
 
