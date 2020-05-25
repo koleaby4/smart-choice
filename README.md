@@ -3,6 +3,8 @@ Smart Choice is a web application, which can help to choose the best option base
 
 This application is based on the framework called Weighted Decision Making Matrix. More information about this framework can be found in [weighted decision matrix prioritization](https://airfocus.io/blog/weighted-decision-matrix-prioritization/) article.
 
+Application can be accessed on: https://koleaby4-smart-choice.herokuapp.com
+
 # Run locally
 
 ## Activate virtual environment
