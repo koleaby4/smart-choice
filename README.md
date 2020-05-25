@@ -175,8 +175,9 @@ because all the calculations were done in the back-end when saving these objects
 
 # User stories (requirements) and tracking progress
 
-We used [github's issues](https://github.com/koleaby4/smart-choice/issues) functionality to capture requirements, bugs and track progress.
-Labels were used for grouping tickets into: NFR(non-functional requirements) and Bugs. All unlabeled tickets are treated as functional requirements.
+We used [github's issues](https://github.com/koleaby4/smart-choice/issues) functionality to capture requirements, bugs and track progress.<br>
+Labels were used for grouping tickets into: NFR(non-functional requirements) and Bugs.<br>
+All unlabeled tickets are treated as functional requirements.
 
 ## Wireframes
 Where useful/needed, wireframes were provided.<br>
@@ -184,9 +185,9 @@ Link to filter: [issues with wireframes](https://github.com/koleaby4/smart-choic
 
 ## Bugs
 
-All defects found during development and testing were captured and labeled with `Bug` label.
+All defects found during development and testing were captured and labelled with `Bug` label.
 
-In order to have a uniform structure and to make it easier to reprocude issues,<br>
+In order to have a uniform structure and to make it easier to reproduce issues,<br>
 bugs have been given the following format:
 1. steps to reproduce
 1. expected result
@@ -195,7 +196,7 @@ bugs have been given the following format:
 Link to filter: all [bugs](https://github.com/koleaby4/smart-choice/issues?q=label%3Abug).
 
 ## Non-functional requirements
-`NFR` label was introduced to track non-functional requirements sunch as deployment, usability, HTML and CSS validations, etc.<br>
+`NFR` label was introduced to track non-functional requirements such as deployment, usability, HTML and CSS validations, etc.<br>
 Link to filter: all [non-functional requirements](https://github.com/koleaby4/smart-choice/issues?q=label%3ANFR).
 
 # Known limitations
@@ -207,6 +208,16 @@ we kept front-end works for mobile devices at the end of the backlog.<br>
 that we are using JS arrow-functions, which are currently [not supported by IE browser](https://caniuse.com/#feat=arrow-functions).<br>
 We raised [issue 27](https://github.com/koleaby4/smart-choice/issues/27) to address this limitation in the future.
 1. Full list of open tickets can be found [here](https://github.com/koleaby4/smart-choice/issues?q=is%3Aopen)
+
+# Choice of fonts and colours
+
+The application is targeting people who wish to apply analytical approach to their decision making.<br>
+Based on this it was decided to use:
+-	neutral greyscale theme to minimise distraction
+-	conveying confidence corporate ‘blue’ colour for primary buttons
+-	danger/alerting ‘red’ colour for deletion icons / buttons
+-	functional and easy to read ‘Roboto’ font
+
 
 # Tools used
 
