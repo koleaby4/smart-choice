@@ -73,6 +73,20 @@ ion-icon[name="trash-outline"] {
   color: #dc3545;
 }
 
+.mobile-portrate{
+  display: none;
+}
+
+/* message for portrate mode */
+@media screen and (max-device-width: 667px) and (orientation: portrait) {
+    .mobile-portrate{
+      display: block;
+    }
+    .mobile-landscape{
+      display: none;
+    }
+}
+
 /* individual components */
 
 
