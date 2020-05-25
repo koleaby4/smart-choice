@@ -41,8 +41,9 @@ Mac:
 ## Execute cypress tests
 
 Prerequisites:
-* Make sure `npm` is installed (see [these steps](https://www.npmjs.com/get-npm) for details).
-* Open terminal window and execute `npm`.
+* make sure `npm` is installed (see [these steps](https://www.npmjs.com/get-npm) for details).
+* run the application locally or change `baseUrl` in `...smart-choice\cypress.json`
+* open terminal window and execute `npm`.
 
 Run tests in Cypress UI:
 1. open terminal window
@@ -66,7 +67,7 @@ Run tests in Cypress UI:
 
 # Deployment to Heroku
 
-We used Heroku as a deployment and hosting platform.
+We used Heroku as a deployment and hosting platform.<br>
 Deployment and configuration steps were taken from this [Heroku: Getting started with Python](https://devcenter.heroku.com/articles/getting-started-with-python) tutorial.
 
 # MongoDb collections design
@@ -80,9 +81,9 @@ Smart Choice application operates with two top level objects:
 Each rule would contain the following information:
  * id
  * rule name
- * timestamp (as string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601))
+ * timestamp (as string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format)
  * criteria - collection of criterion objects with the following structure:
-    * criterion (description / string)
+    * criterion (description as string)
     * multiplier
     * note
 
@@ -126,6 +127,7 @@ Comparison documents have the following structure:
         * score
         * weighted_score (calculated by multplying score by weight from corresponding criterion in rule)
 
+Example of a comparison document:
 
 ```
 {
@@ -163,28 +165,38 @@ Comparison documents have the following structure:
 
  1. It was decided to embed rules into comparisons rather than reference them.
  This is because rules are allowed to change, but we did not want these changes to affect saved comparisons.
- In this way rules can be amended to reflect changing priorities and new comparisons can be created based on these rules,
- however previously saved comparisons remain unchanged - which allows reviewing past decisions.
+ In this way rules can be amended to reflect changing priorities and new comparisons can be created based on these rules.
+ At the same time, previously saved comparisons remain unchanged - which allows reviewing past decisions based on the snapshots of rules taken at that time.
 
 1. Both rules and comparisons have additional fields (timestamps, calculated totals),
 which were not present in the front-end and were added by web-services.
 This information allows faster ordering of rules and comparisons as well as faster rendering of the saved comparisons
 because all the calculations were done in the back-end when saving these objects. This allows keeping front-end simple because it only renders information provided by the back-end.
 
-# Capturing requirements and tracking progress
+# User stories (requirements) and tracking progress
 
 We used [github's issues](https://github.com/koleaby4/smart-choice/issues) functionality to capture requirements, bugs and track progress.
 Labels were used for grouping tickets into: NFR(non-functional requirements) and Bugs. All unlabeled tickets are treated as functional requirements.
 
-Where useful/needed, wireframes were provided(see [Issue 16](https://github.com/koleaby4/smart-choice/issues/16)
-and [Issue 17](https://github.com/koleaby4/smart-choice/issues/17) for examples).
+## Wireframes
+Where useful/needed, wireframes were provided.<br>
+Link to filter: [issues with wireframes](https://github.com/koleaby4/smart-choice/issues?q=label%3AWireframes).
 
-Bugs have the following structure:
+## Bugs
+
+All defects found during development and testing were captured and labeled with `Bug` label.
+
+In order to have a uniform structure and to make it easier to reprocude issues,<br>
+bugs have been given the following format:
 1. steps to reproduce
 1. expected result
 1. actual results
 
-See [Issue 37](https://github.com/koleaby4/smart-choice/issues/37) as an example.
+Link to filter: all [bugs](https://github.com/koleaby4/smart-choice/issues?q=label%3Abug).
+
+## Non-functional requirements
+`NFR` label was introduced to track non-functional requirements sunch as deployment, usability, HTML and CSS validations, etc.<br>
+Link to filter: all [non-functional requirements](https://github.com/koleaby4/smart-choice/issues?q=label%3ANFR).
 
 # Known limitations
 
@@ -194,6 +206,7 @@ we kept front-end works for mobile devices at the end of the backlog.<br>
 1. Certain parts of functionality will not work on Internet Explorer due to the fact <br>
 that we are using JS arrow-functions, which are currently [not supported by IE browser](https://caniuse.com/#feat=arrow-functions).<br>
 We raised [issue 27](https://github.com/koleaby4/smart-choice/issues/27) to address this limitation in the future.
+1. Full list of open tickets can be found [here](https://github.com/koleaby4/smart-choice/issues?q=is%3Aopen)
 
 # Tools used
 
@@ -210,8 +223,9 @@ We raised [issue 27](https://github.com/koleaby4/smart-choice/issues/27) to addr
 
 # 3rd party resources
 
-1. [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
-1. [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
-1. [Google fonts](https://fonts.google.com/)
-1. [ionicons](https://ionicons.com/)
+1. CSS:
+    * [bootstrap 4.4](https://getbootstrap.com/docs/4.4)
+    * [normilize.css](http://nicolasgallagher.com/about-normalize-css/)
+1. Fonts: [Google fonts](https://fonts.google.com/)
+1. Icons: [ionicons](https://ionicons.com/)
 1. Images: [Unsplash](https://unsplash.com/)
