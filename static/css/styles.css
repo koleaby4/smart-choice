@@ -8,14 +8,18 @@
 }
 
 html {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
 }
 
 /* ---- COMMON ----  */
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-size: 100%;
+}
 
 h1,
 h2,
@@ -27,27 +31,29 @@ h6 {
 }
 
 h1 {
+  font-size: 2rem;
   margin-top: 1rem;
   text-align: left;
 }
 
-h2 {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
 h5 {
   text-align: left;
 }
 
+
+h6 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 section {
   position: relative;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin: 1.5rem;
 }
 
 div.navbar-nav a {
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 section > button {
@@ -72,6 +78,10 @@ ion-icon[name="trash-outline"] {
 
 /* == base.html == */
 
+a.navbar-brand {
+  font-size: 1.5rem;
+}
+
 a.navbar-brand img{
   width: 50px;
   height: 50px;
@@ -79,25 +89,10 @@ a.navbar-brand img{
 
 /* == index.html == */
 
-#jumbotron {
-  width: 35%;
-  padding: 1rem;
-  margin-left: 2rem;
-  background-color: #fff;
+.card{
+  width: 18rem;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin-left: -20px;
-  margin-right: -20px;
-
-}
-
-.choice-image {
-  width: 60%;
-  margin: 0px;
-}
 
 /* == rules == */
 
@@ -135,10 +130,6 @@ table select.custom-select {
   margin-bottom: 1rem;
 }
 
-h6 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
 
 .help-page-image {
   display: block;

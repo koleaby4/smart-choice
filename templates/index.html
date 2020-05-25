@@ -2,19 +2,21 @@
 
 {% block content %}
 
-<div class="row">
+<div class="card">
+    <img src="{{url_for('static', filename='images/landing_image_smaller.png')}}" class="img-fluid choice-image"
+    alt="Image with various choices">
 
-    <div class="jumbotron" id="jumbotron">
-        <div class="display-4">Be Smart</div>
-        <p class="lead">Whether you are selecting a car, a school for your child or a partner
-            - we can help you make a rational choice.</p>
-        <hr class="my-4">
-        <p>Prioritise what is important for you - create your own comparison rules.</p>
+    <div class="card-body">
+      <h5 class="card-title">Be Smart</h5>
+      <p class="card-text">Whether you are selecting a car, a school for your child or a partner
+        - we can help you make a rational choice.</p>
+    <p>Prioritise what is important for you - create your own comparison rules.</p>
+    </div>
+    <div class="card-body">
         <a href="{{url_for('rules')}}" class="btn btn-primary btn-lg" id="start-cta-button" role="button">Let's
             start</a>
     </div>
-    <img src="{{url_for('static', filename='images/choice_of_coffee_small.jpg')}}" class="img-fluid choice-image"
-        alt="Image with various choices">
+  </div>
 
-</div>
+
 {% endblock content %}
